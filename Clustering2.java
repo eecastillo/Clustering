@@ -1,6 +1,6 @@
 import java.util.LinkedList;
 import java.util.Queue;
-
+//segunda prueba de concepto
 public class Clustering2{
     public static void main(String[] args){
         //crear los clusters
