@@ -1,36 +1,54 @@
 import java.util.LinkedList;
 import java.util.Queue;
-
+//segunda prueba de concepto
 public class Clustering2{
     public static void main(String[] args){
         //crear los clusters
-        double distancias []={.71,.65,.14,.12,.16,.14,.78,.16,.45,.80};
-      //  Queue<Integer> arrcluster[]=new cluster[elementos.length];
+        double distancias [] = {.22,.33,.15,.16,.84,.45,.62,.51};
        
-        Queue<Double> c1 = new LinkedList<>();
-        Queue<Double> c2 = new LinkedList<>();
-        Queue<Double> c3 = new LinkedList<>();
-        Queue<Double> c4 = new LinkedList<>();
-        Queue<Double> c5 = new LinkedList<>();
-        Queue<Double> c6 = new LinkedList<>();
-        Queue<Double> c7 = new LinkedList<>();
-        Queue<Double> c8 = new LinkedList<>();
-        Queue<Double> c9 = new LinkedList<>();
-        Queue<Double> c10 = new LinkedList<>();
-      //  Queue<Double>[] c = {c1,c2,c3,c4,c5,c6,c7,c8,c9,c10};
-        Queue<Double>[] res = (Queue<Double>[]) new Queue<Double>[distancias.length];
-        c1.add(distancias[0]);
-        c2.add(distancias[1]);
-        c3.add(distancias[2]);
-        c4.add(distancias[3]);
-        c5.add(distancias[4]);
-        c6.add(distancias[5]);
-        c7.add(distancias[6]);
-        c8.add(distancias[7]);
-        c9.add(distancias[8]);
-        c10.add(distancias[9]);
+        Queue<Queue> world = new LinkedList<>();
+        for(int i=0;i<distancias.length;i++){
+            Queue<Double> clus = new LinkedList<>();
+            clus.add(distancias[i]);
+            world.add(clus);
+        }
 
-        System.out.println(c1);
-        //insertar datos
+       Queue<Queue> distances = new LinkedList<>();
+        for(int i=0;i<distancias.length-1;i++){
+            Queue<Double> clus = new LinkedList<>();
+            for(int j=i+1;j<distancias.length;j++){
+                    clus.add(Math.abs(distancias[i]-distancias[j]));
+            }
+            distances.add(clus);
+        }
+
+        int x=1;
+        int y=1;
+        Queue fdim=distances.peek();
+        double distMinClust=(Double)fdim.peek();
+        double temp;
+
+        System.out.println(distances);
+    int filas =distances.size();
+       for(int i=0;i<filas;i++){
+            for(int j=0;j<filas-i;j++){
+                temp=(Double)distances.peek().poll();
+                if(temp<distMinClust){
+                        distMinClust=temp;
+                        x=i+1;
+                        y=j+i+2;
+                    }
+                System.out.println(temp);
+            }
+            distances.remove();
+           
+        }
+        
+        
+        System.out.println(world);
+        System.out.println(distances);
+
+        System.out.printf("x:%d,y:%d,distance:%f",x,y,distMinClust);
+        //insertar datos*/
     }
 }
