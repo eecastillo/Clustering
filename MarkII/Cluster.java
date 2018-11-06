@@ -23,11 +23,7 @@ public class Cluster{
         }
         CalcularCentroide();
     }
-/*
-    public static Cluster Fusion(Cluster x, Cluster y){
-        Cluster new = Cluster();
-    }
-*/
+
     private void CalcularCentroide(){
         double[] temp;
         int size = elements[0].getSize();
@@ -44,7 +40,16 @@ public class Cluster{
     }
 
     public static double Distancia(Cluster x, Cluster y, TipoD tipo){
-        return 0.0;
+        double distance=0.0;
+        switch(tipo){
+            case EUCLIDIAN:
+            break;
+            case MANHATTAN:
+            break;
+            case KERNELIZED:
+            break;
+        }
+        return distance;
     }
 
     public int getSize(){

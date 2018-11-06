@@ -4,6 +4,7 @@ import java.util.Arrays;
 public class Clustering{
    
     public static void main(String[] args){
+        //creacion de dos clusters por separado para despues convertirse en uno solo
         ArrayList<Cluster> clust = new ArrayList<Cluster>();
         double[] data={4,1,2,5,6,3,2,1,4};
         Cluster Goten = new Cluster(data);
