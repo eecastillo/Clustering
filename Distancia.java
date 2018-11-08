@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 public class Distancia{
     private double[] elementos;
     private DistanciaTipo tipo= DistanciaTipo.EUCLIDEAN;
@@ -39,4 +40,17 @@ public class Distancia{
       }
     }
 
+=======
+public class Distancia{
+    private double[] normalizados;
+    private DistanciaTipo tipo= DistanciaTipo.EUCLIDEAN;
+
+  /*  public Distancia(){
+    }
+
+    public Distancia(int ){
+
+    }
+*/
+>>>>>>> 2bc72a71e6b5fc94b60645287124f665108e4746
 }
