@@ -3,61 +3,61 @@ import java.util.Arrays;
 //import Cluster;
 public class Clustering{
 
-    public static String[] Hamming(String[] arr){
-        String [] h=new String[5];
-        return h;
+   
+    public static double[][] extractNum(String [][] matriz,boolean[] arrIsInteger){
+        int numInt=0;
+        for(boolean num: arrIsInteger)
+            if(num)
+                numInt++;
+
+        double [][] numData=new double[matriz.length][numInt];
+        int numCol=0;
+        for(int j=0;j<arrIsInteger.length;j++){
+            if(arrIsInteger[j]){
+                for(int i=0;i<matriz.length;i++){
+                   // System.out.println(Double.valueOf(matriz[i][j]));
+                    numData[i][numCol]=Double.valueOf(matriz[i][j]);
+                }
+                numCol++;
+            }
+        }
+        return numData;
+    }
+    public static double[][][] extractASCII(String [][] matriz,boolean[] arrIsInteger){
+        int numStr=0;
+        for(boolean str: arrIsInteger)
+            if(!str)
+                numStr++;
+        double [][][] ASCIIValues=new double [matriz.length][numStr][10];
+        
+        int wordCol=0;
+        for(int j=0;j<arrIsInteger.length;j++){
+            if(!arrIsInteger[j]){
+                for(int i=0;i<matriz.length;i++){
+                    String word=matriz[i][j].toUpperCase();
+                    for(int p=0;p<word.length();p++){
+                        ASCIIValues[i][wordCol][p]= (double)word.charAt(p);;
+                    }
+                }
+                wordCol++;
+            }
+        }
+        return ASCIIValues;
     }
     
-    public static double[][] sentido(String [][] matriz){
-        int[] arrIsInteger = new int[matriz[0].length];//1: entero, 2:string
-       // double[] minIntvalue= new double[matriz[0].length]; 
-        double[] ASCIIValue;
-        double [][] matrix=new double[matriz.length][matriz[0].length];
+    
+    public static boolean[] Clasificar(String [][] matriz){
+        boolean[] arrIsInteger = new boolean[matriz[0].length];
+        double test=0.0;
         for(int j=0;j<matriz[0].length;j++){
-           // double min =Double.MAX_VALUE;
-            for(int i=0;i<matriz.length;i++){
-                switch(arrIsInteger[j]){
-                    case 0:
-                        try{
-                            matrix[i][j]=Double.valueOf(matriz[i][j]);
-                            arrIsInteger[j]=1;
-                
-                        }catch(NumberFormatException e){
-                            String word=matriz[i][j].toLowerCase();
-                            for(int p=0;p<word.length();p++){
-                                matrix[i][j]+= (double)word.charAt(p);;
-                            }
-                            arrIsInteger[j]=2;
-                        }
-                    break;
-                    case 1:
-                        matrix[i][j]=Double.valueOf(matriz[i][j]);
-                    break;
-                    case 2:
-                        String word=matriz[i][j].toLowerCase();
-                        for(int p=0;p<word.length();p++){
-                            matrix[i][j]+= (double)word.charAt(p);;
-                        }
-                       
-                    break;
-                }
-               /* if(arrIsInteger[j]==1 && matrix[i][j]<min){
-                    min=matrix[i][j];
-                    System.out.println(min);
-                }*/
-               
+            try{
+                test=Double.valueOf(matriz[0][j]);
+                arrIsInteger[j]=true;
+            }catch(NumberFormatException e){
+                arrIsInteger[j]=false;
             }
-            /*if(arrIsInteger[j]==1){
-                minIntvalue[j]=min;
-                for(int n=0;n<matriz.length;n++){
-                    matrix[n][j]-=minIntvalue[j];
-                }
-            }*/
         }
-        //for(int k=0;k<matrix.length;k++)
-        //    System.out.println(Arrays.toString(matrix[k]));
-        
-        return matrix;
+        return arrIsInteger;
     }
    
     public static void main(String[] args){
@@ -114,15 +114,30 @@ public class Clustering{
                               {"13","PeRrO"}};
                               System.out.println(alumnos.length);
                               System.out.println(alumnos[0].length);
-        double [][] tabla = sentido(alumnos);
-        for(int k=0;k<tabla.length;k++)
-            System.out.println(Arrays.toString(tabla[k]));
-        Cluster c0 = new Cluster(tabla[0]);
+        
+        boolean [] classify=Clasificar(alumnos);
+        
+        double[][]  matrixNum = extractNum(alumnos, classify);
+        for(int i=0;i<matrixNum.length;i++){
+            System.out.println(Arrays.toString( matrixNum[i]));
+        }
+        System.out.println();
+        double[][][] matrixASCII=extractASCII(alumnos, classify);
+        for(int i=0;i<matrixASCII.length;i++){
+            for(int j=0;j<matrixASCII[i].length;j++){
+                System.out.println(Arrays.toString( matrixASCII[i][j]));
+            }
+        }
+        ArrayList<Cluster> clust = new ArrayList<Cluster>();
+        for(int n=0;n<alumnos.length;n++){
+            clust.add(new Cluster(matrixNum[n],matrixASCII[n]));
+        }
+        /*Cluster c0 = new Cluster(tabla[0]);
         Cluster c1 = new Cluster(tabla[1]);
         Cluster c2 = new Cluster(tabla[2]);
         Cluster c3 = new Cluster(tabla[3]);
         Cluster c4 = new Cluster(tabla[4]);
-
+*/
        
 
     }

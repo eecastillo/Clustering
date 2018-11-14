@@ -6,9 +6,9 @@ public class Cluster{
     private int size=1;
     private double[] centroide;
 
-    public Cluster(double[] data){
+    public Cluster(double[] numData, double[][] ASCIIData){
         this.elements= new Elemento[1];
-        this.elements[0]=new Elemento(data);
+        this.elements[0]=new Elemento(numData,ASCIIData);
         System.out.println(this.elements[0]);
         CalcularCentroide();
     }

@@ -9,7 +9,7 @@ public class Elemento{
     private double[] normalizado;
     
     public Elemento(double[] numeros, double[][] palabras){//--------------->un arreglo para datos numericos y otro arreglo de arreglos 
-        this.datosNumericos=datos;                                        //representando la primera dimension cada palabra y la segunda
+        this.datosNumericos=numeros;                                        //representando la primera dimension cada palabra y la segunda
         this.datosASCII=palabras;                                         //cada representacion de la letra en ASCII
         size=numeros.length+palabras.length;
         Normalizar();
@@ -26,11 +26,21 @@ public class Elemento{
     }
     //calcula la magnitud del conjunto de categorias
     private void CalcMagnitude(){
-        double cuadrados=0;
-        for(int i=0;i<categorias.length;i++){
-            cuadrados += categorias[i]*categorias[i];
+        double magnitudNum=0;
+        double magnitudString=0;
+        double promASCII=0;
+        for(int i=0;i<datosNumericos.length;i++){
+            magnitudNum += datosNumericos[i]*datosNumericos[i];
         }
-        this.magnitud=Math.sqrt(cuadrados);
+        for(int i=0;i<datosASCII.length;i++){
+            promASCII=0;
+            for(int a=0;a<datosASCII[i].length;a++){
+                promASCII+=datosASCII[i][j];
+            }
+            magnitudString+=(promASCII/datosASCII[i].length)*(promASCII/datosASCII[i].length);
+        }
+        magnitudNum=Math.sqrt(magnitudNum);
+        this.magnitud=(magnitudNum*datosNumericos.length/size)+(magnitudString*datosASCII.length/size);
         System.out.println(this.magnitud);
     }
 
