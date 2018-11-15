@@ -2,9 +2,74 @@ import java.util.ArrayList;
 import java.util.Arrays;
 //import Cluster;
 public class Clustering{
+   
+    private static double[][] NormalizarNum(double [][] matriz){
+        double[] magnitudes= CalcMagnitudesNum(matriz);
+        double[][] normalizado = new double[matriz.length][matriz[0].length];
+        for(int i=0;i<matriz.length;i++){
+            for(int j=0;j<matriz[0].length;j++){
+                normalizado[i][j]=matriz[i][j]/magnitudes[j];
+            }
+        }
+        return normalizado;
+    }
+    //calcula la magnitud del conjunto de categorias
+    private static double[] CalcMagnitudesNum(double[][] matriz){
+        double magnitudNum=0;
+        double[] magnitudes= new double[matriz[0].length];
+        for(int j=0;j<matriz[0].length;j++){
+            magnitudNum=0;
+            for(int i=0;i<matriz.length;i++){
+                magnitudNum += matriz[i][j]*matriz[i][j];
+            }
+            magnitudNum=Math.sqrt(magnitudNum);
+            magnitudes[j]=magnitudNum;
+        }
+        return magnitudes;
+    }
+    ///programar las funciones de normalizar en funcion de las columnas
+    //ESTO NO ES UN COMENTARIO, AYUDAAAAA!!!!!!!!
+    private static double[][][] NormalizarASCII(double[][][] matriz){
+        double[][] magnitudes=CalcMagnitudesASCII(matriz);
+        double[][][] normalizado=new double[matriz.length][matriz[0].length][matriz[0][0].length];
+
+        for(int i=0; i<matriz.length; i++){
+            for(int j=0;j<matriz[0].length;j++){
+                for(int k=0; k<matriz[0][0].length;k++){
+                    normalizado[i][j][k]=matriz[i][j][k]/magnitudes[j][k];
+                }
+            }
+        }
+       
+        for(int i=0;i<normalizado.length;i++){
+            for(int j=0;j<normalizado[i].length;j++){
+                System.out.println(Arrays.toString( normalizado[i][j]));
+            }
+        }
+        
+
+        return normalizado;
+
+    }
+    private static double[][] CalcMagnitudesASCII(double[][][] matriz){
+        double magnitudASCII=0;
+        double[][] magnitudes= new double[matriz[0].length][matriz[0][0].length];
+        for(int k=0; k<matriz[0][0].length;k++){
+            magnitudASCII=0;
+            for(int j=0; j<matriz[0].length;j++) {
+                for(int i=0; i<matriz.length;i++ ){
+                    magnitudASCII += matriz[i][j][k] * matriz[i][j][k];
+                }
+                magnitudASCII = Math.sqrt(magnitudASCII);
+                magnitudes[j][k]=magnitudASCII;
+            }
+        }
+        return magnitudes;
+    }
+
 
    
-    public static double[][] extractNum(String [][] matriz,boolean[] arrIsInteger){
+    private static double[][] extractNum(String [][] matriz,boolean[] arrIsInteger){
         int numInt=0;
         for(boolean num: arrIsInteger)
             if(num)
@@ -128,9 +193,11 @@ public class Clustering{
                 System.out.println(Arrays.toString( matrixASCII[i][j]));
             }
         }
+        double[][] matrixNumNormalized= NormalizarNum(matrixNum);
+        double[][][] matrixASCIINormalized = NormalizarASCII(matrixASCII);
         ArrayList<Cluster> clust = new ArrayList<Cluster>();
         for(int n=0;n<alumnos.length;n++){
-            clust.add(new Cluster(matrixNum[n],matrixASCII[n]));
+            clust.add(new Cluster(matrixNumNormalized[n],matrixASCII[n]));
         }
         /*Cluster c0 = new Cluster(tabla[0]);
         Cluster c1 = new Cluster(tabla[1]);
