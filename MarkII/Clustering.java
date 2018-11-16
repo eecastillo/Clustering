@@ -1,3 +1,5 @@
+package Clustering.MarkII;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 //import Cluster;
@@ -41,11 +43,11 @@ public class Clustering{
             }
         }
        
-        for(int i=0;i<normalizado.length;i++){
+      /*  for(int i=0;i<normalizado.length;i++){
             for(int j=0;j<normalizado[i].length;j++){
                 System.out.println(Arrays.toString( normalizado[i][j]));
             }
-        }
+        }*/
         
 
         return normalizado;
@@ -138,18 +140,13 @@ public class Clustering{
         Cluster Goten = new Cluster(data);
         double[] data2={3,6,5,4,2,1,1,4,5};
         Cluster Trunks = new Cluster(data2);
-
         
-
         clust.add(Goten);
         clust.add(Trunks);
         Cluster Gotenks = new Cluster(Goten,Trunks);
-
         clust.remove(Goten);
         clust.remove(Trunks);
-
         clust.add(Gotenks);
-
         System.out.println(Goten);
         System.out.println(Trunks);
         System.out.println("FUUUUUSIIOOOOON");
@@ -162,45 +159,42 @@ public class Clustering{
         Cluster Goten = new Cluster(data);
         double[] data2={11,1.85,1,5,4};
         Cluster Trunks = new Cluster(data2);
-
         double[] data3={526,2.10,1,4,2};
         Cluster Goku = new Cluster(data3);
-
         clust.add(Goten);
         clust.add(Trunks);
         clust.add(Goku);
-
         double distance1 = Cluster.Distancia(Goten, Trunks, TipoD.EUCLIDIAN);
         double distance2 = Cluster.Distancia(Goten, Goku, TipoD.EUCLIDIAN);
         double distance3 = Cluster.Distancia(Goku, Trunks, TipoD.EUCLIDIAN);
-
         System.out.printf("Distancia entre goten y trunks es: %f\n",distance1);
         System.out.printf("Distancia entre goten y goku es: %f\n",distance2);
         System.out.printf("Distancia entre goku y trunks es: %f\n",distance3);
 */ 
-        String [][] alumnos ={{"15","perros"},
-                              {"15","Perra"},
-                              {"16","PERRas"},
-                              {"14","PerrO"},
-                              {"13","PeRrO"}};
+    	
+        String [][] alumnos ={{"15","100","perros"},
+                              {"1","150","Ps"},
+                              {"16","90","PERRas"},
+                              {"14","120","PerrO"},
+                              {"13","110","PeRrO"}};
                               System.out.println(alumnos.length);
                               System.out.println(alumnos[0].length);
         
         boolean [] classify=Clasificar(alumnos);
         
         double[][]  matrixNum = extractNum(alumnos, classify);
-        for(int i=0;i<matrixNum.length;i++){
+      /*  for(int i=0;i<matrixNum.length;i++){
             System.out.println(Arrays.toString( matrixNum[i]));
         }
-        System.out.println();
+        System.out.println();*/
         double[][][] matrixASCII=extractASCII(alumnos, classify);
-        for(int i=0;i<matrixASCII.length;i++){
+      /*  for(int i=0;i<matrixASCII.length;i++){
             for(int j=0;j<matrixASCII[i].length;j++){
                 System.out.println(Arrays.toString( matrixASCII[i][j]));
             }
-        }
+        }*/
         double[][] matrixNumNormalized= NormalizarNum(matrixNum);
-        double[][][] matrixASCIINormalized = NormalizarASCII(matrixASCII);
+       // double[][][] matrixASCIINormalized = NormalizarASCII(matrixASCII);
         ArrayList<Cluster> clust = new ArrayList<Cluster>();
         for(int n=0;n<alumnos.length;n++){
             clust.add(new Cluster(matrixNumNormalized[n],matrixASCII[n]));
@@ -211,7 +205,11 @@ public class Clustering{
         Cluster c3 = new Cluster(tabla[3]);
         Cluster c4 = new Cluster(tabla[4]);
 */
-       
+        
+//       Cluster.Distancia(clust.get(0), clust.get(1), TipoD.EUCLIDIAN);
+//       Cluster.Distancia(clust.get(0), clust.get(1), TipoD.MANHATTAN);
+//       Cluster.Distancia(clust.get(0), clust.get(1), TipoD.PEARSON_CORRELATION);
+       Cluster.Distancia(clust.get(0), clust.get(1), TipoD.EISEN_COSINE_CORRELATION);
 
     }
 }
