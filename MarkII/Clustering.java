@@ -93,12 +93,18 @@ public class Clustering{
         for(boolean str: arrIsInteger)
             if(!str)
                 numStr++;
-        double [][][] ASCIIValues=new double [matriz.length][numStr][10];
+        double [][][] ASCIIValues=new double [matriz.length][numStr][];
         
         int wordCol=0;
         for(int j=0;j<arrIsInteger.length;j++){
             if(!arrIsInteger[j]){
+                int max=0;
                 for(int i=0;i<matriz.length;i++){
+                    if(matriz[i][j].length()>max)
+                        max=matriz[i][j].length();
+                }
+                for(int i=0;i<matriz.length;i++){
+                    ASCIIValues[i][wordCol]=new double[max];
                     String word=matriz[i][j].toUpperCase();
                     for(int p=0;p<word.length();p++){
                         ASCIIValues[i][wordCol][p]= (double)word.charAt(p);;
