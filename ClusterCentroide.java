@@ -8,7 +8,7 @@ public class ClusterCentroide extends Cluster{
 		CalcularCentroideASCII();
     }
 
-    public ClusterCentroide(Cluster x, Cluster y){
+    public ClusterCentroide(ClusterCentroide x, ClusterCentroide y){
         super(x, y);
         CalcularCentroideNumerico();
 		CalcularCentroideASCII();
@@ -55,11 +55,27 @@ public class ClusterCentroide extends Cluster{
             System.out.println();*/
     }
 
-    public static double Distancia(Cluster x, Cluster y, TipoD tipo){
+    public static double Distancia(ClusterCentroide x, ClusterCentroide y, TipoD tipo){
         double[] centroideNumX = x.getCentroideNum();
 		double[] centroideNumY = y.getCentroideNum();
 		double[][] centroideASCIIX = x.getCentroideASCII();
 		double[][] centroideASCIIY = y.getCentroideASCII();
-        return Cluster.Distancia(centroideNumX, centroideNumY, centroideASCIIX,centroideASCIIY, tipo);
-    }
+		return Cluster.Distancia(centroideNumX, centroideNumY, centroideASCIIX,centroideASCIIY, tipo);
+		
+		//System.out.println(Arrays.toString(centroideNumX));
+		//System.out.println(Arrays.toString(centroideNumY));
+		/*for(int i=0;i<centroideASCIIX.length;i++) {
+			System.out.println(Arrays.toString(centroideASCIIX[i]));
+		}
+		for(int i=0;i<centroideASCIIY.length;i++) {
+			System.out.println(Arrays.toString(centroideASCIIY[i]));
+		}*/
+	}
+	public double[] getCentroideNum(){
+		return this.centroideNum;
+	}
+
+	public double[][] getCentroideASCII(){
+		return this.centroideASCII;
+	}
 }

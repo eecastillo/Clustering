@@ -163,9 +163,9 @@ public class Clustering{
      //  Cluster.Distancia(clust.get(0), clust.get(1), TipoD.EISEN_COSINE_CORRELATION);
 
        //AGLOMERATIVO
-       ArrayList<Cluster> clust = new ArrayList<Cluster>();
+       ArrayList<ClusterCentroide> clust = new ArrayList<ClusterCentroide>();
        for(int n=0;n<alumnos.length;n++){
-           clust.add(new Cluster(matrixNumNormalized[n],matrixASCII[n]));
+           clust.add(new ClusterCentroide(matrixNumNormalized[n],matrixASCII[n]));
        }
        System.out.println(clust.size());
 
@@ -183,7 +183,7 @@ public class Clustering{
                for(int j=i+1;j<clust.size();j++){
                    System.out.printf("%d %d \n",i,j);
                    
-                    distance=Cluster.Distancia(clust.get(i), clust.get(j), TipoD.EUCLIDIAN);
+                    distance=ClusterCentroide.Distancia(clust.get(i), clust.get(j), TipoD.EUCLIDIAN);
                     System.out.printf("Distancia entre %d y %d: %f\n",i,j,distance);
                     if(distance<distanceMin){
                         distanceMin=distance;
@@ -195,7 +195,7 @@ public class Clustering{
            }
            System.out.printf("Distancia minima entre %d y %d: %f\n",x,y,distance);
             
-            clust.add(new Cluster(clust.remove(y),clust.remove(x)));
+            clust.add(new ClusterCentroide(clust.remove(y),clust.remove(x)));
             for(int n=0;n<clust.size();n++){
                 System.out.println(clust.get(n));
             }

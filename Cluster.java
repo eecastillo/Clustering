@@ -2,17 +2,15 @@
 //import Elemento;
 import java.util.Arrays;
 public class Cluster{
-	private Elemento[] elements;
-	private int size=1;
-	private double[] centroideNum;
-	private double[][]  centroideASCII;
+	protected Elemento[] elements;
+	protected int size=1;
+	
 
 	public Cluster(double[] numData, double[][] ASCIIData){
 		this.elements= new Elemento[1];
 		this.elements[0]=new Elemento(numData,ASCIIData);
 		// System.out.println(this.elements[0]);
-		CalcularCentroideNumerico();
-		CalcularCentroideASCII();
+		
 	}
 
 	public Cluster(Cluster x, Cluster y){
@@ -26,78 +24,27 @@ public class Cluster{
 			this.elements[j]=elementsY[j-x.getSize()];
 		}
 		this.size=x.getSize()+y.getSize();
-		CalcularCentroideNumerico();
-		CalcularCentroideASCII();
+		
 	}
 
-	private void CalcularCentroideNumerico(){
-		double[] temp;
-		int size = elements[0].getSizeNum();
-		centroideNum = new double[size];
-		double CompCentroide=0;
-		for(int i=0;i<size;i++){
-			CompCentroide=0;
-			for(int j=0;j<elements.length;j++){
-				temp=elements[j].getNumeros();
-				CompCentroide += temp[i];
-			}
-			centroideNum[i]=CompCentroide/elements.length;
-		}
+	
 
-	}
-	private void CalcularCentroideASCII(){
-		double[][] temp;
-		int size = elements[0].getSizeASCII();
-		int sizeOfASCII=elements[0].getASCII()[0].length;
-		centroideASCII=new double[size][sizeOfASCII];
-		double CompCentroide=0;
-		for(int i=0;i<size;i++){
-			// System.out.println(i);
-
-			for(int j=0;j<sizeOfASCII;j++){
-				CompCentroide=0;
-				for(int k=0;k<elements.length;k++){
-					temp=elements[k].getASCII();
-					CompCentroide += temp[i][j];
-				}
-				for(int k=0;k<size;k++){         
-					centroideASCII[i][j]=CompCentroide/elements.length;
-				}
-			}
-		}
-		/*  for(int n=0;n<centroideASCII.length;n++){
-          System.out.print(Arrays.toString(centroideASCII[n]));
-      }
-      System.out.println();*/
-	}
-
-	public static double Distancia(Cluster x, Cluster y, TipoD tipo){
+	public static double Distancia(double[] xNum, double[] yNum, double[][] xASCII, double[][] yASCII, TipoD tipo){
 		double distance=0.0;
 		double distanceNum=0;
 		double distanceASCII=0;
-		double[] centroideNumX = x.getCentroideNum();
-		double[] centroideNumY = y.getCentroideNum();
-		double[][] centroideASCIIX = x.getCentroideASCII();
-		double[][] centroideASCIIY = y.getCentroideASCII();
-		double ASCIISize = centroideASCIIX.length;
-		double size = centroideNumX.length;
+		
+		double ASCIISize = xASCII.length;
+		double size = xNum.length;
 		double totalSize=ASCIISize+size;
 
 
-		//System.out.println(Arrays.toString(centroideNumX));
-		//System.out.println(Arrays.toString(centroideNumY));
-		/*for(int i=0;i<centroideASCIIX.length;i++) {
-			System.out.println(Arrays.toString(centroideASCIIX[i]));
-		}
-		for(int i=0;i<centroideASCIIY.length;i++) {
-			System.out.println(Arrays.toString(centroideASCIIY[i]));
-		}*/
 
 		//Hamming
 		for(int i=0; i<ASCIISize ;i++) {
-			double centroideASCIIlength= (double)centroideASCIIX[i].length;
-			for(int j=0; j<centroideASCIIlength; j++) {
-				distanceASCII += ((centroideASCIIX[i][j]==centroideASCIIY[i][j]) ? 0: 1)/ centroideASCIIlength ;
+			double ASCIIlength= (double)xASCII[i].length;
+			for(int j=0; j<ASCIIlength; j++) {
+				distanceASCII += ((xASCII[i][j]==yASCII[i][j]) ? 0: 1)/ ASCIIlength ;
 			}
 		}
 		distanceASCII = distanceASCII/ASCIISize;
@@ -107,21 +54,21 @@ public class Cluster{
 		switch(tipo){
 		case EUCLIDIAN:
 			for(int i=0;i<size;i++){
-				distanceNum += (centroideNumX[i]-centroideNumY[i])*(centroideNumX[i]-centroideNumY[i]);
+				distanceNum += (xNum[i]-yNum[i])*(xNum[i]-yNum[i]);
 			}
 			distanceNum = Math.sqrt(distanceNum);
 			break;
 		case MANHATTAN:
 			for(int i=0;i<size;i++){
-				distanceNum += Math.abs(centroideNumX[i]-centroideNumY[i]);
+				distanceNum += Math.abs(xNum[i]-yNum[i]);
 			}
 			break;
 		case PEARSON_CORRELATION:
 			double xProm = 0;
 			double yProm=0;
 			for(int i=0;i<size;i++){
-				xProm += centroideNumX[i];
-				yProm += centroideNumY[i];
+				xProm += xNum[i];
+				yProm += yNum[i];
 			}
 			xProm = xProm/size;
 			yProm = yProm/size;
@@ -134,13 +81,13 @@ public class Cluster{
 			double denominadorY= 0.0;
 
 			for(int i=0;i<size;i++) {
-				numerador+= (centroideNumX[i]-xProm)*(centroideNumY[i]-yProm);
+				numerador+= (xNum[i]-xProm)*(yNum[i]-yProm);
 			}
 			for(int i=0;i<size;i++) {
-				denominadorX+= (centroideNumX[i]-xProm)*(centroideNumX[i]-xProm);
+				denominadorX+= (xNum[i]-xProm)*(xNum[i]-xProm);
 			}
 			for(int i=0;i<size;i++) {
-				denominadorY+= (centroideNumY[i]-yProm)*(centroideNumY[i]-yProm);
+				denominadorY+= (yNum[i]-yProm)*(yNum[i]-yProm);
 			}
 			//System.out.println("numerador: "+numerador);
 			//System.out.println("Denominador x: " + denominadorX);
@@ -152,13 +99,13 @@ public class Cluster{
 			double denominadorXE= 0.0;
 			double denominadorYE= 0.0;
 			for(int i=0;i<size;i++) {
-				numeradorE+= centroideNumX[i]*centroideNumY[i];
+				numeradorE+= xNum[i]*yNum[i];
 			}
 			for(int i=0;i<size;i++) {
-				denominadorXE+= centroideNumX[i]*centroideNumX[i];
+				denominadorXE+= xNum[i]*xNum[i];
 			}
 			for(int i=0;i<size;i++) {
-				denominadorYE+= centroideNumY[i]*centroideNumY[i];
+				denominadorYE+= yNum[i]*yNum[i];
 			}
 			//System.out.println("numerador: "+numeradorE);
 			//System.out.println("Denominador x: " + denominadorXE);
@@ -178,13 +125,13 @@ public class Cluster{
 			double denominadorYS= 0.0;
 
 			for(int i=0;i<size;i++) {
-				numeradorS+= (centroideNumX[i]-xRank)*(centroideNumY[i]-yRank);
+				numeradorS+= (xNum[i]-xRank)*(yNum[i]-yRank);
 			}
 			for(int i=0;i<size;i++) {
-				denominadorXS+= (centroideNumX[i]-xRank)*(centroideNumX[i]-xRank);
+				denominadorXS+= (xNum[i]-xRank)*(xNum[i]-xRank);
 			}
 			for(int i=0;i<size;i++) {
-				denominadorYS+= (centroideNumY[i]-yRank)*(centroideNumY[i]-yRank);
+				denominadorYS+= (yNum[i]-yRank)*(yNum[i]-yRank);
 			}
 			//System.out.println("numerador: "+numerador);
 			//System.out.println("Denominador x: " + denominadorX);
@@ -217,11 +164,5 @@ public class Cluster{
 		return print;
 	}
 
-	public double[] getCentroideNum(){
-		return this.centroideNum;
-	}
-
-	public double[][] getCentroideASCII(){
-		return this.centroideASCII;
-	}
+	
 }
