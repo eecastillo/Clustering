@@ -29,7 +29,7 @@ public class Cluster{
 
 	
 
-	public static double Distancia(double[] xNum, double[] yNum, double[][] xASCII, double[][] yASCII, TipoD tipo){
+	protected static double Distancia(double[] xNum, double[] yNum, double[][] xASCII, double[][] yASCII, TipoD tipo){
 		double distance=0.0;
 		double distanceNum=0;
 		double distanceASCII=0;
