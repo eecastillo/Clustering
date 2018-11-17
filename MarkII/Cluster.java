@@ -1,4 +1,3 @@
-package Clustering.MarkII;
 
 //import Elemento;
 import java.util.Arrays;
@@ -85,14 +84,14 @@ public class Cluster{
 		double totalSize=ASCIISize+size;
 
 
-		System.out.println(Arrays.toString(centroideNumX));
-		System.out.println(Arrays.toString(centroideNumY));
-		for(int i=0;i<centroideASCIIX.length;i++) {
+		//System.out.println(Arrays.toString(centroideNumX));
+		//System.out.println(Arrays.toString(centroideNumY));
+		/*for(int i=0;i<centroideASCIIX.length;i++) {
 			System.out.println(Arrays.toString(centroideASCIIX[i]));
 		}
 		for(int i=0;i<centroideASCIIY.length;i++) {
 			System.out.println(Arrays.toString(centroideASCIIY[i]));
-		}
+		}*/
 
 		//Hamming
 		for(int i=0; i<ASCIISize ;i++) {
@@ -161,9 +160,9 @@ public class Cluster{
 			for(int i=0;i<size;i++) {
 				denominadorYE+= centroideNumY[i]*centroideNumY[i];
 			}
-			System.out.println("numerador: "+numeradorE);
-			System.out.println("Denominador x: " + denominadorXE);
-			System.out.println("Denominador y: " +denominadorYE);
+			//System.out.println("numerador: "+numeradorE);
+			//System.out.println("Denominador x: " + denominadorXE);
+			//System.out.println("Denominador y: " +denominadorYE);
 			distanceNum = 1 - (numeradorE/Math.sqrt(denominadorXE*denominadorYE));
 			break;
 		case KENDALL_CORRELATION:
@@ -171,8 +170,8 @@ public class Cluster{
 			double yRank=0;
 	
 
-			System.out.println("prom y = " + yRank);
-			System.out.println("prom x =" + xRank);
+			//System.out.println("prom y = " + yRank);
+			//System.out.println("prom x =" + xRank);
 
 			double numeradorS= 0.0;
 			double denominadorXS= 0.0;
@@ -194,9 +193,9 @@ public class Cluster{
 		}
 
 		distance=(distanceNum*(size/totalSize)) + (distanceASCII*(ASCIISize/totalSize));
-		System.out.println("distanceNUM: " + distanceNum);
+		/*System.out.println("distanceNUM: " + distanceNum);
 		System.out.println("distanceASCII: " + distanceASCII);
-		System.out.println("distanceTotal: " + distance);
+		System.out.println("distanceTotal: " + distance);*/
 		return distance;
 	}
 
@@ -211,8 +210,10 @@ public class Cluster{
 	@Override
 	public String toString(){
 		String print="";
-		for(int i=0;i<elements.length;i++)
+		for(int i=0;i<elements.length;i++){
 			print+=elements[i].toString();
+			print+="/";
+		}
 		return print;
 	}
 

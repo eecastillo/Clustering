@@ -1,4 +1,3 @@
-package Clustering.MarkII;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -134,43 +133,7 @@ public class Clustering{
     }
    
     public static void main(String[] args){
-        //creacion de dos clusters por separado para despues convertirse en uno solo
-       /* ArrayList<Cluster> clust = new ArrayList<Cluster>();
-        double[] data={4,1,2,5,6,3,2,1,4};
-        Cluster Goten = new Cluster(data);
-        double[] data2={3,6,5,4,2,1,1,4,5};
-        Cluster Trunks = new Cluster(data2);
-        
-        clust.add(Goten);
-        clust.add(Trunks);
-        Cluster Gotenks = new Cluster(Goten,Trunks);
-        clust.remove(Goten);
-        clust.remove(Trunks);
-        clust.add(Gotenks);
-        System.out.println(Goten);
-        System.out.println(Trunks);
-        System.out.println("FUUUUUSIIOOOOON");
-        System.out.println(Gotenks);
-        System.out.println(Arrays.toString(Trunks.getCentroide()));
-        System.out.println(Arrays.toString(Goten.getCentroide()));
-        System.out.println(Arrays.toString(Gotenks.getCentroide()));*/
-       /* ArrayList<Cluster> clust = new ArrayList<Cluster>();
-        double[] data={12,1.98,1,2,4};
-        Cluster Goten = new Cluster(data);
-        double[] data2={11,1.85,1,5,4};
-        Cluster Trunks = new Cluster(data2);
-        double[] data3={526,2.10,1,4,2};
-        Cluster Goku = new Cluster(data3);
-        clust.add(Goten);
-        clust.add(Trunks);
-        clust.add(Goku);
-        double distance1 = Cluster.Distancia(Goten, Trunks, TipoD.EUCLIDIAN);
-        double distance2 = Cluster.Distancia(Goten, Goku, TipoD.EUCLIDIAN);
-        double distance3 = Cluster.Distancia(Goku, Trunks, TipoD.EUCLIDIAN);
-        System.out.printf("Distancia entre goten y trunks es: %f\n",distance1);
-        System.out.printf("Distancia entre goten y goku es: %f\n",distance2);
-        System.out.printf("Distancia entre goku y trunks es: %f\n",distance3);
-*/ 
+       
     	
         String [][] alumnos ={{"15","100","perros"},
                               {"1","150","Ps"},
@@ -195,21 +158,51 @@ public class Clustering{
         }*/
         double[][] matrixNumNormalized= NormalizarNum(matrixNum);
        // double[][][] matrixASCIINormalized = NormalizarASCII(matrixASCII);
-        ArrayList<Cluster> clust = new ArrayList<Cluster>();
-        for(int n=0;n<alumnos.length;n++){
-            clust.add(new Cluster(matrixNumNormalized[n],matrixASCII[n]));
-        }
-        /*Cluster c0 = new Cluster(tabla[0]);
-        Cluster c1 = new Cluster(tabla[1]);
-        Cluster c2 = new Cluster(tabla[2]);
-        Cluster c3 = new Cluster(tabla[3]);
-        Cluster c4 = new Cluster(tabla[4]);
-*/
-        
-//       Cluster.Distancia(clust.get(0), clust.get(1), TipoD.EUCLIDIAN);
-//       Cluster.Distancia(clust.get(0), clust.get(1), TipoD.MANHATTAN);
-//       Cluster.Distancia(clust.get(0), clust.get(1), TipoD.PEARSON_CORRELATION);
-       Cluster.Distancia(clust.get(0), clust.get(1), TipoD.EISEN_COSINE_CORRELATION);
+       
+       
+     //  Cluster.Distancia(clust.get(0), clust.get(1), TipoD.EISEN_COSINE_CORRELATION);
+
+       //AGLOMERATIVO
+       ArrayList<Cluster> clust = new ArrayList<Cluster>();
+       for(int n=0;n<alumnos.length;n++){
+           clust.add(new Cluster(matrixNumNormalized[n],matrixASCII[n]));
+       }
+       System.out.println(clust.size());
+
+       for(int n=0;n<clust.size();n++){
+        System.out.println(clust.get(n));
+    }
+
+       while(clust.size()>1){
+           double distanceMin=Double.MAX_VALUE;
+           int x=0;
+           int y=0;
+           double distance=0;
+           for(int i=0;i<clust.size()-1;i++){
+               // System.out.println(i);
+               for(int j=i+1;j<clust.size();j++){
+                   System.out.printf("%d %d \n",i,j);
+                   
+                    distance=Cluster.Distancia(clust.get(i), clust.get(j), TipoD.EUCLIDIAN);
+                    System.out.printf("Distancia entre %d y %d: %f\n",i,j,distance);
+                    if(distance<distanceMin){
+                        distanceMin=distance;
+                        x=i;
+                        y=j;
+                        
+                    }
+               }
+           }
+           System.out.printf("Distancia minima entre %d y %d: %f\n",x,y,distance);
+            
+            clust.add(new Cluster(clust.remove(y),clust.remove(x)));
+            for(int n=0;n<clust.size();n++){
+                System.out.println(clust.get(n));
+            }
+            System.out.println(clust.size());
+       }
+
+       //DIVISIVO
 
     }
 }

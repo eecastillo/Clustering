@@ -1,5 +1,3 @@
-package Clustering.MarkII;
-
 public enum TipoD{
     EUCLIDIAN,
     MANHATTAN,
