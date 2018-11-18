@@ -47,7 +47,13 @@ public class Cluster{
 				distanceASCII += ((xASCII[i][j]==yASCII[i][j]) ? 0: 1)/ ASCIIlength ;
 			}
 		}
-		distanceASCII = distanceASCII/ASCIISize;
+		//si ASCIISize era 0, existia una división de 0 entre0
+		if(ASCIISize>0){
+			distanceASCII = distanceASCII/ASCIISize;
+		}
+		else{
+			distanceASCII=0;
+		}
 
 
 
