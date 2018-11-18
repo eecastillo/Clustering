@@ -1,6 +1,9 @@
 import com.opencsv.CSVReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 //import Cluster;
 public class Clustering{
    
@@ -133,24 +136,42 @@ public class Clustering{
     }
    
     public static void main(String[] args){
-       
+        String[][] data={{""}};
+       try{
+            List<String> lines = Files.readAllLines(Paths.get("test.csv"));
+            int columas=Integer.parseInt(lines.get(0).split(",")[1]);
+            int filas=Integer.parseInt(lines.get(1).split(",")[1]);
+            data=new String[filas][];
+            //System.out.printf("  %d,%d",filas,columas);
+            lines=lines.subList(2, lines.size());
+            for(int i=0;i<lines.size();i++){
+                String ln = lines.get(i).replace("\"", "");
+                data[i]=lines.get(i).split(",");
+            }
+            for(int n=0;n<data.length;n++){
+                System.out.println(Arrays.toString(data[n]));
+            }
+          
+       }catch(Exception e){
+           System.out.println(e.getMessage());
+       }
     	
-        String [][] alumnos ={{"15","100","perros"},
+       /* String [][] alumnos ={{"15","100","perros"},
                               {"1","150","Ps"},
                               {"16","90","PERRas"},
                               {"14","120","PerrO"},
                               {"13","110","PeRrO"}};
                               System.out.println(alumnos.length);
                               System.out.println(alumnos[0].length);
+        */
+        boolean [] classify=Clasificar(data);
         
-        boolean [] classify=Clasificar(alumnos);
-        
-        double[][]  matrixNum = extractNum(alumnos, classify);
+        double[][]  matrixNum = extractNum(data, classify);
       /*  for(int i=0;i<matrixNum.length;i++){
             System.out.println(Arrays.toString( matrixNum[i]));
         }
         System.out.println();*/
-        double[][][] matrixASCII=extractASCII(alumnos, classify);
+        double[][][] matrixASCII=extractASCII(data, classify);
       /*  for(int i=0;i<matrixASCII.length;i++){
             for(int j=0;j<matrixASCII[i].length;j++){
                 System.out.println(Arrays.toString( matrixASCII[i][j]));
@@ -163,9 +184,9 @@ public class Clustering{
      //  Cluster.Distancia(clust.get(0), clust.get(1), TipoD.EISEN_COSINE_CORRELATION);
 
        //AGLOMERATIVO
-       ArrayList<ClusterAverage> clust = new ArrayList<ClusterAverage>();
-       for(int n=0;n<alumnos.length;n++){
-           clust.add(new ClusterAverage(matrixNumNormalized[n],matrixASCII[n]));
+       ArrayList<ClusterMax> clust = new ArrayList<ClusterMax>();
+       for(int n=0;n<data.length;n++){
+           clust.add(new ClusterMax(matrixNumNormalized[n],matrixASCII[n]));
        }
        System.out.println(clust.size());
 
@@ -183,7 +204,7 @@ public class Clustering{
                for(int j=i+1;j<clust.size();j++){
                    System.out.printf("%d %d \n",i,j);
                    
-                    distance=ClusterAverage.Distancia(clust.get(i), clust.get(j), TipoD.EUCLIDIAN);
+                    distance=ClusterMax.Distancia(clust.get(i), clust.get(j), TipoD.EUCLIDIAN);
                     System.out.printf("Distancia entre %d y %d: %f\n",i,j,distance);
                     if(distance<distanceMin){
                         distanceMin=distance;
@@ -193,9 +214,9 @@ public class Clustering{
                     }
                }
            }
-           System.out.printf("Distancia minima entre %d y %d: %f\n",x,y,distance);
+           System.out.printf("Distancia minima entre %d y %d: %f\n",x,y,distanceMin);
             
-            clust.add(new ClusterAverage(clust.remove(y),clust.remove(x)));
+            clust.add(new ClusterMax(clust.remove(y),clust.remove(x)));
             for(int n=0;n<clust.size();n++){
                 System.out.println(clust.get(n));
             }
