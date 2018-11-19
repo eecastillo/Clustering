@@ -1,4 +1,4 @@
-import com.opencsv.CSVReader;
+//import com.opencsv.CSVReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -188,7 +188,7 @@ public class Clustering{
      //  Cluster.Distancia(clust.get(0), clust.get(1), TipoD.EISEN_COSINE_CORRELATION);
 
        //AGLOMERATIVO
-      /* ArrayList<ClusterCentroide> clust = new ArrayList<ClusterCentroide>();
+       ArrayList<ClusterCentroide> clust = new ArrayList<ClusterCentroide>();
        for(int n=0;n<data.length;n++){
            clust.add(new ClusterCentroide(matrixNumNormalized[n],matrixASCII[n]));
        }
@@ -225,10 +225,10 @@ public class Clustering{
                 System.out.println(clust.get(n));
             }
             System.out.println(clust.size());
-       }*/
+       }
 
        //DIVISIVO
-       
+       /*
         ArrayList<ClusterCentroide> clustD = new ArrayList<ClusterCentroide>();
         clustD.add(new ClusterCentroide(matrixNumNormalized,matrixASCII));
         Boolean isSingleton=true;
@@ -251,6 +251,6 @@ public class Clustering{
         }while(!isSingleton);
         for(int n=0;n<clustD.size();n++){
             System.out.println(clustD.get(n));
-        }
+        }*/
     }
 }

@@ -43,9 +43,13 @@ public class Cluster{
 		double distance=0.0;
 		double distanceNum=0;
 		double distanceASCII=0;
-		
-		double ASCIISize = xASCII.length;
-		double size = xNum.length;
+
+		double ASCIISize=0;
+		if(xASCII!=null)
+			ASCIISize = xASCII.length;
+		double size=0;
+		if(xNum!=null)
+			size = xNum.length;
 		double totalSize=ASCIISize+size;
 
 
