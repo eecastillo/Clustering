@@ -172,21 +172,25 @@ public class Clustering{
         }
         System.out.println();*/
         double[][][] matrixASCII=extractASCII(data, classify);
-      /*  for(int i=0;i<matrixASCII.length;i++){
+        for(int i=0;i<matrixASCII.length;i++){
             for(int j=0;j<matrixASCII[i].length;j++){
                 System.out.println(Arrays.toString( matrixASCII[i][j]));
             }
-        }*/
+        }
         double[][] matrixNumNormalized= NormalizarNum(matrixNum);
+        for(int i=0;i<matrixNumNormalized.length;i++){
+            System.out.println(Arrays.toString(matrixNumNormalized[i]));
+        }
+        System.out.println();
        // double[][][] matrixASCIINormalized = NormalizarASCII(matrixASCII);
        
        
      //  Cluster.Distancia(clust.get(0), clust.get(1), TipoD.EISEN_COSINE_CORRELATION);
 
        //AGLOMERATIVO
-       ArrayList<ClusterMax> clust = new ArrayList<ClusterMax>();
+      /* ArrayList<ClusterCentroide> clust = new ArrayList<ClusterCentroide>();
        for(int n=0;n<data.length;n++){
-           clust.add(new ClusterMax(matrixNumNormalized[n],matrixASCII[n]));
+           clust.add(new ClusterCentroide(matrixNumNormalized[n],matrixASCII[n]));
        }
        System.out.println(clust.size());
 
@@ -202,9 +206,9 @@ public class Clustering{
            for(int i=0;i<clust.size()-1;i++){
                // System.out.println(i);
                for(int j=i+1;j<clust.size();j++){
-                   System.out.printf("%d %d \n",i,j);
+                 //  System.out.printf("%d %d \n",i,j);
                    
-                    distance=ClusterMax.Distancia(clust.get(i), clust.get(j), TipoD.EUCLIDIAN);
+                    distance=ClusterCentroide.Distancia(clust.get(i), clust.get(j), TipoD.EUCLIDIAN);
                     System.out.printf("Distancia entre %d y %d: %f\n",i,j,distance);
                     if(distance<distanceMin){
                         distanceMin=distance;
@@ -216,14 +220,37 @@ public class Clustering{
            }
            System.out.printf("Distancia minima entre %d y %d: %f\n",x,y,distanceMin);
             
-            clust.add(new ClusterMax(clust.remove(y),clust.remove(x)));
+            clust.add(new ClusterCentroide(clust.remove(y),clust.remove(x)));
             for(int n=0;n<clust.size();n++){
                 System.out.println(clust.get(n));
             }
             System.out.println(clust.size());
-       }
+       }*/
 
        //DIVISIVO
+       
+        ArrayList<ClusterCentroide> clustD = new ArrayList<ClusterCentroide>();
+        clustD.add(new ClusterCentroide(matrixNumNormalized,matrixASCII));
+        Boolean isSingleton=true;
+        
+        do{
+            isSingleton=true;
+            for(int i=0;i<clustD.size();i++){
+               // System.out.println(clustD.get(i).size);
+                if(clustD.get(i).size>1){
+                   // System.out.printf("indice:%d, tamaño:%d\n",i,clustD.get(i).size);
+                    isSingleton=false;
+                    ClusterCentroide[] arrClust=ClusterCentroide.Divir(clustD.remove(i));
+                    clustD.add(arrClust[0]);
+                    clustD.add(arrClust[1]);
+                    break;
+                }
+              // System.out.printf("tamaño lista:%d\n",clustD.size());
+            }
 
+        }while(!isSingleton);
+        for(int n=0;n<clustD.size();n++){
+            System.out.println(clustD.get(n));
+        }
     }
 }
