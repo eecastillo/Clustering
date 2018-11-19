@@ -9,8 +9,6 @@ public class Cluster{
 	public Cluster(double[] numData, double[][] ASCIIData){
 		this.elements= new Elemento[1];
 		this.elements[0]=new Elemento(numData,ASCIIData);
-		// System.out.println(this.elements[0]);
-		
 	}
 
 	public Cluster(Cluster x, Cluster y){
@@ -27,6 +25,18 @@ public class Cluster{
 		
 	}
 
+	public Cluster(double[][] numTable, double[][][] ASCIITable){
+		this.elements = new Elemento[numTable.length];
+		this.size=numTable.length;
+		for(int i=0;i<numTable.length;i++){
+			this.elements[i]=new Elemento(numTable[i],ASCIITable[i]);
+		//	System.out.println(this.elements[i]);
+		}
+	}
+	public Cluster(){
+		this.size=0;
+		//this.elements=new Elemento[0];
+	}
 	
 
 	protected static double Distancia(double[] xNum, double[] yNum, double[][] xASCII, double[][] yASCII, TipoD tipo){
@@ -196,13 +206,14 @@ public class Cluster{
 
 	@Override
 	public String toString(){
+		//System.out.printf("el tamaño de elementos es: %d\n",this.size);
 		String print="";
-		for(int i=0;i<elements.length;i++){
+		for(int i=0;i<this.size;i++){
 			print+=elements[i].toString();
 			print+="/";
 		}
 		return print;
 	}
-
+	
 	
 }

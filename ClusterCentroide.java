@@ -1,3 +1,4 @@
+import java.util.Arrays;
 public class ClusterCentroide extends Cluster{
     private double[] centroideNum;
     private double[][]  centroideASCII;
@@ -12,7 +13,15 @@ public class ClusterCentroide extends Cluster{
         super(x, y);
         CalcularCentroideNumerico();
 		CalcularCentroideASCII();
-    }
+	}
+	public ClusterCentroide(double[][] numTable, double[][][] ASCIITable){
+		super(numTable,ASCIITable);
+		CalcularCentroideNumerico();
+		CalcularCentroideASCII();
+	}
+	public ClusterCentroide(){
+		super();
+	}
     
     private void CalcularCentroideNumerico(){
 		double[] temp;
@@ -27,18 +36,22 @@ public class ClusterCentroide extends Cluster{
 			}
 			centroideNum[i]=CompCentroide/elements.length;
 		}
-
+		//System.out.println(Arrays.toString(centroideNum));
 	}
 	private void CalcularCentroideASCII(){
 		double[][] temp;
 		int size = elements[0].getSizeASCII();
-		int sizeOfASCII=elements[0].getASCII()[0].length;
-		centroideASCII=new double[size][sizeOfASCII];
+		if(size==0)return;
+		int[] sizesOfASCII=new int[size];
+		for(int i=0;i<size;i++){
+			sizesOfASCII[i]=elements[0].getASCII()[i].length;
+		}
+		centroideASCII=new double[size][];
 		double CompCentroide=0;
 		for(int i=0;i<size;i++){
 			// System.out.println(i);
-
-			for(int j=0;j<sizeOfASCII;j++){
+			centroideASCII[i]=new double[sizesOfASCII[i]];
+			for(int j=0;j<sizesOfASCII[i];j++){
 				CompCentroide=0;
 				for(int k=0;k<elements.length;k++){
 					temp=elements[k].getASCII();
@@ -49,7 +62,7 @@ public class ClusterCentroide extends Cluster{
 				}
 			}
         }
-        /*  for(int n=0;n<centroideASCII.length;n++){
+          /*for(int n=0;n<centroideASCII.length;n++){
                 System.out.print(Arrays.toString(centroideASCII[n]));
             }
             System.out.println();*/
@@ -77,5 +90,70 @@ public class ClusterCentroide extends Cluster{
 
 	public double[][] getCentroideASCII(){
 		return this.centroideASCII;
+	}
+
+	public static ClusterCentroide[] Divir(ClusterCentroide clust){
+		ClusterCentroide[] arrClust=new ClusterCentroide[2];
+		arrClust[0]=new ClusterCentroide();
+		arrClust[1]=new ClusterCentroide();
+		
+		Elemento Centroide = new Elemento(clust.getCentroideNum(),clust.getCentroideASCII());
+		for(int i=0;i<clust.elements.length;i++){
+			if(Elemento.isBigger(clust.elements[i], Centroide)>0.5){
+			//	System.out.printf("Es mayor con: %f\n",Elemento.isBigger(clust.elements[i], Centroide));
+				arrClust[1].AddElement(clust.elements[i]);
+			}
+			else{
+			//	System.out.printf("Es menor con: %f\n",Elemento.isBigger(clust.elements[i], Centroide));
+				arrClust[0].AddElement(clust.elements[i]);
+			}
+		}
+		if(arrClust[0].size==0){
+		
+			arrClust[0].AddElement(arrClust[1].RemoveElement(0));
+			
+		}
+		else if(arrClust[1].size==0){
+			arrClust[1].AddElement(arrClust[0].RemoveElement(0));
+				
+		}
+
+		//System.out.println(Arrays.toString(clust.getCentroideNum()));
+		/*for(int n=0;n<clust.getCentroideASCII().length;n++){
+			System.out.print(Arrays.toString(clust.getCentroideASCII()[n]));
+		}*/
+		/*System.out.println();
+		System.out.println(arrClust[0]);
+		System.out.println();
+		System.out.println(arrClust[1]);*/
+		return arrClust;
+	}
+
+	public void AddElement(Elemento nuevo){
+		Elemento[] temp=new Elemento[this.size+1];
+		for(int i=0;i<this.size;i++){
+			temp[i]=this.elements[i];
+		}
+		temp[this.size]=nuevo;
+		this.elements=temp;
+		this.size++;
+		//System.out.printf("tamaño nuevo al agregar 1: %d\n",this.size);
+		CalcularCentroideASCII();
+		CalcularCentroideNumerico();
+	}
+	public Elemento RemoveElement(int index){
+		Elemento[] temp=new Elemento[this.size-1];
+		Elemento basura = this.elements[index];
+		for(int i=0,t=0;i<size;i++){
+			if(i!=index){
+				temp[t]=this.elements[i];
+				t++;
+			}
+		}
+		this.elements=temp;
+		this.size=temp.length;
+		CalcularCentroideASCII();
+		CalcularCentroideNumerico();
+		return basura;
 	}
 }
