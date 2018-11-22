@@ -7,7 +7,7 @@ public class ClusterMin extends Cluster{
         super(x,y);
     }
 
-    public static double Distancia(ClusterMin x, ClusterMin y, TipoD tipo){
+    public static double Distancia(Cluster x, Cluster y, TipoD tipo){
         double distance=0;
         double minDistance=Cluster.Distancia( x.elements[0].getNumeros(), y.elements[0].getNumeros(), x.elements[0].getASCII(), y.elements[0].getASCII(), tipo);
         

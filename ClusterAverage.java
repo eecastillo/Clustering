@@ -7,7 +7,7 @@ public class ClusterAverage extends Cluster{
         super(x,y);
     }
 
-    public static double Distancia(ClusterAverage x, ClusterAverage y, TipoD tipo){
+    public static double Distancia(Cluster x, Cluster y, TipoD tipo){
         double distance=0;
         
         for(int i=0;i<x.size;i++){

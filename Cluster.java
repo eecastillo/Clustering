@@ -1,15 +1,18 @@
 
 //import Elemento;
+import java.util.Arrays;//import Elemento;
 import java.util.Arrays;
 public class Cluster{
 	protected Elemento[] elements;
 	protected int size=1;
-	
+
 
 	public Cluster(double[] numData, double[][] ASCIIData){
 		this.elements= new Elemento[1];
 		this.elements[0]=new Elemento(numData,ASCIIData);
 	}
+
+
 
 	public Cluster(Cluster x, Cluster y){
 		this.elements= new Elemento[x.getSize()+y.getSize()];
@@ -22,7 +25,7 @@ public class Cluster{
 			this.elements[j]=elementsY[j-x.getSize()];
 		}
 		this.size=x.getSize()+y.getSize();
-		
+
 	}
 
 	public Cluster(double[][] numTable, double[][][] ASCIITable){
@@ -30,7 +33,7 @@ public class Cluster{
 		this.size=numTable.length;
 		for(int i=0;i<numTable.length;i++){
 			this.elements[i]=new Elemento(numTable[i],ASCIITable[i]);
-		//	System.out.println(this.elements[i]);
+			//	System.out.println(this.elements[i]);
 		}
 	}
 	public Cluster(){
@@ -38,14 +41,38 @@ public class Cluster{
 		//this.elements=new Elemento[0];
 	}
 	
+	public void setMatrices (double[] numData, double[][] ASCIIData){
+		this.elements= new Elemento[1];
+		this.elements[0]=new Elemento(numData,ASCIIData);
+	}
+
+//	public void setMatrixASCII( Cluster y) {
+//
+//	}
+
+	public int getSize(){
+		return this.size;
+	}
+
+	public Elemento[] getElements(){
+		return elements;
+	}
+
+	 public static double Distancia(Cluster x, Cluster y, TipoD tipo){
+		 return 0;
+	 }
 
 	protected static double Distancia(double[] xNum, double[] yNum, double[][] xASCII, double[][] yASCII, TipoD tipo){
 		double distance=0.0;
 		double distanceNum=0;
 		double distanceASCII=0;
-		
-		double ASCIISize = xASCII.length;
-		double size = xNum.length;
+
+		double ASCIISize=0;
+		if(xASCII!=null)
+			ASCIISize = xASCII.length;
+		double size=0;
+		if(xNum!=null)
+			size = xNum.length;
 		double totalSize=ASCIISize+size;
 
 
@@ -57,7 +84,7 @@ public class Cluster{
 				distanceASCII += ((xASCII[i][j]==yASCII[i][j]) ? 0: 1)/ ASCIIlength ;
 			}
 		}
-		//si ASCIISize era 0, existia una divisiÃ³n de 0 entre0
+		//si ASCIISize era 0, existia una división de 0 entre0
 		if(ASCIISize>0){
 			distanceASCII = distanceASCII/ASCIISize;
 		}
@@ -137,18 +164,18 @@ public class Cluster{
 			Arrays.parallelSort(xSorted);
 			double[] ySorted = Arrays.copyOf(yNum, yNum.length);
 			Arrays.parallelSort(ySorted);
-			
-			
+
+
 			for(int i=0;i<size;i++) {
 				double xties=0;
 				double yties=0;
-				
+
 				for(int j=0;j<size;j++) {
 					if(xNum[i]==xNum[j]) 
 						xties++;
 					if(yNum[i]==yNum[j])
 						yties++;
-					
+
 				}
 				if(xties==1) {
 					auxRank=Arrays.binarySearch(xSorted, xNum[i]);
@@ -156,7 +183,7 @@ public class Cluster{
 				}
 				else if(xties!=1) {
 					for(int j=0; j<xties; j++)
-					xRank[i]=size-(Arrays.binarySearch(xSorted, xNum[i])+j);
+						xRank[i]=size-(Arrays.binarySearch(xSorted, xNum[i])+j);
 					xRank[i]=xRank[i]/xties;
 				}
 				if(yties==1) {
@@ -166,26 +193,26 @@ public class Cluster{
 				else if(yties!=1) {
 					for(int j=0; j<xties; j++)
 						yRank[i]=size-(Arrays.binarySearch(ySorted, yNum[i])+j);
-						yRank[i]=yRank[i]/yties;
+					yRank[i]=yRank[i]/yties;
 				}
 
 			}
-			
-			
+
+
 			//System.out.println("yNum" +Arrays.toString( yNum));
 			//System.out.println("xNum" +Arrays.toString( xNum));
 			//System.out.println("ySorted" +Arrays.toString( ySorted));
 			//System.out.println("xSorted" +Arrays.toString( xSorted));
 			//System.out.println("yRank" +Arrays.toString( yRank));
 			//System.out.println("xRank" +Arrays.toString( xRank));
-	
+
 
 			double numeradorS= 0.0;
 			for(int i=0;i<size;i++) {
 				numeradorS+= (xRank[i]-yRank[i])*(xRank[i]-yRank[i]);
 			}
-			
-			
+
+
 			distanceNum = 1 - 6*numeradorS/(size*((size*size)-1));
 		}
 
@@ -196,17 +223,10 @@ public class Cluster{
 		return distance;
 	}
 
-	public int getSize(){
-		return this.size;
-	}
-
-	public Elemento[] getElements(){
-		return elements;
-	}
 
 	@Override
 	public String toString(){
-		//System.out.printf("el tamaÃ±o de elementos es: %d\n",this.size);
+		//System.out.printf("el tamaño de elementos es: %d\n",this.size);
 		String print="";
 		for(int i=0;i<this.size;i++){
 			print+=elements[i].toString();
@@ -214,6 +234,8 @@ public class Cluster{
 		}
 		return print;
 	}
-	
-	
+
+
+
+
 }

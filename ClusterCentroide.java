@@ -109,12 +109,13 @@ public class ClusterCentroide extends Cluster{
 			}
 		}
 		if(arrClust[0].size==0){
-		
-			arrClust[0].AddElement(arrClust[1].RemoveElement(0));
+			for(int i=0;i<arrClust[1].size/2;i++)
+				arrClust[0].AddElement(arrClust[1].RemoveElement(0));
 			
 		}
 		else if(arrClust[1].size==0){
-			arrClust[1].AddElement(arrClust[0].RemoveElement(0));
+			for(int i=0;i<arrClust[0].size/2;i++)
+				arrClust[1].AddElement(arrClust[0].RemoveElement(0));
 				
 		}
 
