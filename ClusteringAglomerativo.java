@@ -1,16 +1,19 @@
 import java.util.ArrayList;
 
-public class ClusteringAglomerativo<T extends Cluster> extends Clustering {
+public class ClusteringAglomerativo extends Clustering {
+	/** Esta clase............
+	 * @author: Castillo Pulido Ethandrake, Anahí Santana Hernández, Ricardo Cuevas Rosas
+	 * @version: 21/11/2018
+	 */
 
 	//final Class<T> t;
-	public Class fingirCentroide(TipoC tipoc) {
-		return ClusterCentroide;
-	}
+
 	public ClusteringAglomerativo(String Uri, TipoD tipoD, TipoC tipoC) {
 		super(Uri);
-		ArrayList<T> clust = new ArrayList<T>();
+		ArrayList<Cluster> clust = new ArrayList<Cluster>();
 		for(int n=0;n<data.length;n++){
-			clust.add(new ClusterCentroide(matrixNumNormalized[n],matrixASCII[n]));
+			ClusterFactory clusterTipe = new ClusterFactory(tipoC,matrixNumNormalized[n],matrixASCII[n]);
+			clust.add(clusterTipe.getCluster());
 		}
 		System.out.println(clust.size());
 
@@ -28,7 +31,7 @@ public class ClusteringAglomerativo<T extends Cluster> extends Clustering {
 				for(int j=i+1;j<clust.size();j++){
 					//  System.out.printf("%d %d \n",i,j);
 
-					distance=ClusterCentroide.Distancia(clust.get(i), clust.get(j), tipoD);
+					distance=ClusterCentroide.Distancia(clust.get(i), clust.get(j), tipoD); //aqui se debe cambiar algo
 					System.out.printf("Distancia entre %d y %d: %f\n",i,j,distance);
 					if(distance<distanceMin){
 						distanceMin=distance;

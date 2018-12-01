@@ -1,0 +1,4 @@
+elegir entre un archivo y la matriz
+hacer la clase aglomerativa bien 
+
+Una clase factory que nos regrese una intancia, lo hace con enumeraciones 

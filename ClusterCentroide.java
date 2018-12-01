@@ -1,5 +1,12 @@
-import java.util.Arrays;
+
 public class ClusterCentroide extends Cluster{
+	/** Esta clase contiene el tipo de cluster por distancia centroide.
+	 * En este tipo de cluster la semejanza entre dos clusters
+     *  esta dada por la distancia entre sus centroides.
+	 * @author: Castillo Pulido Ethandrake, Anahí Santana Hernández, Ricardo Cuevas Rosas
+	 * @version: 21/11/2018
+	 */
+	
     private double[] centroideNum;
     private double[][]  centroideASCII;
     
@@ -8,20 +15,33 @@ public class ClusterCentroide extends Cluster{
         CalcularCentroideNumerico();
 		CalcularCentroideASCII();
     }
+    /** Crea un ClusterCentroide
+     * @param  double[] numData - matriz con datos numericos, double[][] ASCIIData - matriz con datos ASCII
+    */
 
     public ClusterCentroide(ClusterCentroide x, ClusterCentroide y){
         super(x, y);
         CalcularCentroideNumerico();
 		CalcularCentroideASCII();
 	}
+    /** Crea un Cluster Centroide
+     * @param ClusterAverage  x, ClusterAverage  y
+    */
+
+    
 	public ClusterCentroide(double[][] numTable, double[][][] ASCIITable){
 		super(numTable,ASCIITable);
 		CalcularCentroideNumerico();
 		CalcularCentroideASCII();
 	}
+	   /** Crea un ClusterCentroide
+     * @param  double[][] numData - matriz con datos numericos, double[][][] ASCIIData - matriz con datos ASCII
+    */
 	public ClusterCentroide(){
 		super();
 	}
+	   /** Crea un ClusterCentroide
+ */
     
     private void CalcularCentroideNumerico(){
 		double[] temp;
@@ -38,6 +58,9 @@ public class ClusterCentroide extends Cluster{
 		}
 		//System.out.println(Arrays.toString(centroideNum));
 	}
+    /** Calcula el centroide de los datos númericos
+    */
+
 	private void CalcularCentroideASCII(){
 		double[][] temp;
 		int size = elements[0].getSizeASCII();
@@ -67,6 +90,8 @@ public class ClusterCentroide extends Cluster{
             }
             System.out.println();*/
     }
+    /** Calcula el centroide de los datos ASCII
+    */
 
     public static double Distancia(ClusterCentroide x, ClusterCentroide y, TipoD tipo){
         double[] centroideNumX = x.getCentroideNum();
@@ -84,13 +109,25 @@ public class ClusterCentroide extends Cluster{
 			System.out.println(Arrays.toString(centroideASCIIY[i]));
 		}*/
 	}
+    /** Regresa la distancia entre los centroidesd de dos clusters, usando el tipo de distancia seleccionado
+     * @param  ClusterCentroide x- el primer cluster a comparar, ClusterCenroide y- el segundo cluster a comparar , TipoD tipo- tipo de ditsnacia que se quiere
+     * @return  double averageDistance
+    */
+    
+    
 	public double[] getCentroideNum(){
 		return this.centroideNum;
 	}
+	   /** Regresa la el centroide númerico
+     * @return  double[] centroideNum[]
+    */
 
 	public double[][] getCentroideASCII(){
 		return this.centroideASCII;
 	}
+	   /** Regresa la el centroide ASCII
+  * @return  double[][] centroideASCII
+ */
 
 	public static ClusterCentroide[] Divir(ClusterCentroide clust){
 		ClusterCentroide[] arrClust=new ClusterCentroide[2];
@@ -129,6 +166,11 @@ public class ClusterCentroide extends Cluster{
 		System.out.println(arrClust[1]);*/
 		return arrClust;
 	}
+    /** Divide el cluster en dos  , los mayores y los menores
+     * @param  ClusterCentroide- el cluster que se quiere dividir en dos
+     *  @return   ClusterCentroide[2]- un arreglo con dos cluster uno con los mayores y uno con los menores
+    */
+	
 
 	public void AddElement(Elemento nuevo){
 		Elemento[] temp=new Elemento[this.size+1];
@@ -142,6 +184,10 @@ public class ClusterCentroide extends Cluster{
 		CalcularCentroideASCII();
 		CalcularCentroideNumerico();
 	}
+    /** Agrega un nuevo elemento al centroide
+     * @param  Elemento- el elemento que se quiere agregar 
+     */
+	 
 	public Elemento RemoveElement(int index){
 		Elemento[] temp=new Elemento[this.size-1];
 		Elemento basura = this.elements[index];
@@ -157,4 +203,7 @@ public class ClusterCentroide extends Cluster{
 		CalcularCentroideNumerico();
 		return basura;
 	}
+    /** Elimina un elemento del centroide
+     * @param  Elemento- el elemento que se quiere eliminar
+     */
 }

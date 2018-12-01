@@ -1,8 +1,11 @@
 
 //import Elemento;
 import java.util.Arrays;//import Elemento;
-import java.util.Arrays;
 public class Cluster{
+	/** Esta clase representa un cluster
+	 * @author: Castillo Pulido Ethandrake, Anahí Santana Hernández, Ricardo Cuevas Rosas
+	 * @version: 21/11/2018
+	 */
 	protected Elemento[] elements;
 	protected int size=1;
 
@@ -11,6 +14,9 @@ public class Cluster{
 		this.elements= new Elemento[1];
 		this.elements[0]=new Elemento(numData,ASCIIData);
 	}
+    /** Crea un Cluster
+     * @param  double[] numData - matriz con datos numericos, double[][] ASCIIData - matriz con datos ASCII
+    */
 
 
 
@@ -25,9 +31,12 @@ public class Cluster{
 			this.elements[j]=elementsY[j-x.getSize()];
 		}
 		this.size=x.getSize()+y.getSize();
-
 	}
+    /** Crea un Cluster
+     * @param Cluster  x, Cluster  y
+    */
 
+	
 	public Cluster(double[][] numTable, double[][][] ASCIITable){
 		this.elements = new Elemento[numTable.length];
 		this.size=numTable.length;
@@ -36,19 +45,25 @@ public class Cluster{
 			//	System.out.println(this.elements[i]);
 		}
 	}
+/** Crea un Cluster
+  * @param  double[][] numData - matriz con datos numericos, double[][][] ASCIIData - matriz con datos ASCII
+ */
 	public Cluster(){
 		this.size=0;
 		//this.elements=new Elemento[0];
 	}
+	/** Crea un Cluster con 0 elementos
+	 */
+    
 	
 	public void setMatrices (double[] numData, double[][] ASCIIData){
 		this.elements= new Elemento[1];
 		this.elements[0]=new Elemento(numData,ASCIIData);
 	}
-
-//	public void setMatrixASCII( Cluster y) {
-//
-//	}
+	/** Establece las matrices del cluster
+	 * @param double[] numData-  martiz númerica, double[][] ASCIIData- matriz ASCII
+	 */
+	
 
 	public int getSize(){
 		return this.size;
