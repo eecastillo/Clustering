@@ -1,15 +1,16 @@
 import java.util.*;
 
 public class ClusteringDivisivo extends Clustering {
-	/** Esta clase............
+	/** Esta clase reliza el tipo de clustering divisivo.
+	 * En este tipo de clustering todos los elementos empiezan en un mismo cluster 
+	 * y se van dividiendo segun sus diferenciqas.
 	 * @author: Castillo Pulido Ethandrake, Anahí Santana Hernández, Ricardo Cuevas Rosas
 	 * @version: 21/11/2018
 	 */
 
 	public ClusteringDivisivo(String Uri) {
 		super(Uri);
-	
-	
+		
 	ArrayList<ClusterCentroide> clustD = new ArrayList<ClusterCentroide>();
 	
      clustD.add(new ClusterCentroide(matrixNumNormalized,matrixASCII));
@@ -47,5 +48,9 @@ public class ClusteringDivisivo extends Clustering {
 
      }
 	}
+	/** Reliza el tipo de clustering divisivo
+	 *@param Uri- la dirección del archivo de donde se sacará la información para relizar clustering
+	 */
+	
 
 }

@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 
 public class Clustering{
-	/** Esta clase............
+	/** Esta clase representa el algoritmo de Clustering
 	 * @author: Castillo Pulido Ethandrake, Anahí Santana Hernández, Ricardo Cuevas Rosas
 	 * @version: 21/11/2018
 	 */
@@ -26,6 +26,9 @@ public class Clustering{
 	public Clustering(String Uri){
 		start(Uri);
 	}
+	/** 
+	 * @param: Uri- direccion del archivo de donde se obtendran los datos 
+	 */
 
 	private double[][] NormalizarNum(double [][] matriz){
 		double[] magnitudes= CalcMagnitudesNum(matriz);
@@ -37,6 +40,11 @@ public class Clustering{
 		}
 		return normalizado;
 	}
+	/** Normaliza la matriz de datos númericos
+	 * @param:  matriz- double [][]  matriz númerica con los datos a normalizar
+	 * @return:  normalizado - double[][] matriz númerica con los datos normalizados
+	 */
+	
 
 	//calcula la magnitud del conjunto de categorias
 	private double[] CalcMagnitudesNum(double[][] matriz){
@@ -52,8 +60,14 @@ public class Clustering{
 		}
 		return magnitudes;
 	}
+	/**Calcula la magnitud del conjunto númerico
+	 * @param:  matriz- double[][]  martiz con el conjunto númerico del cual se desea la magnitud
+	 * @return:   magnitudes- double[]  magnitudes de la matriz
+	 */ 
+	
 	///programar las funciones de normalizar en funcion de las columnas
 	//ESTO NO ES UN COMENTARIO, AYUDAAAAA!!!!!!!!
+	
 	private double[][][] NormalizarASCII(double[][][] matriz){
 		double[][] magnitudes=CalcMagnitudesASCII(matriz);
 		double[][][] normalizado=new double[matriz.length][matriz[0].length][matriz[0][0].length];
@@ -65,11 +79,13 @@ public class Clustering{
 				}
 			}
 		}
-
-
 		return normalizado;
-
 	}
+	/** Normaliza la matriz de datos ASSCI
+	 * @param:  matriz- double [][]  matriz númerica(de ASCII) con los datos a normalizar
+	 * @return:  normalizado - double[][] matriz númerica(de ASCII) con los datos normalizados
+	 */
+	
 	private double[][] CalcMagnitudesASCII(double[][][] matriz){
 		double magnitudASCII=0;
 		double[][] magnitudes= new double[matriz[0].length][matriz[0][0].length];
@@ -84,7 +100,12 @@ public class Clustering{
 			}
 		}
 		return magnitudes;
-	}
+		
+	}	
+	/**Calcula la magnitud del conjunto ASCII
+	 * @param:  matriz- double[][]  martiz con el conjunto ASCII del cual se desea la magnitud
+	 * @return:   magnitudes- double[]  magnitudes de la matriz
+	 */ 
 
 
 
@@ -93,7 +114,6 @@ public class Clustering{
 		for(boolean num: arrIsInteger)
 			if(num)
 				numInt++;
-
 		double [][] numData=new double[matriz.length][numInt];
 		int numCol=0;
 		for(int j=0;j<arrIsInteger.length;j++){
@@ -106,6 +126,14 @@ public class Clustering{
 		}
 		return numData;
 	}
+	/** Extrae los datos númericos de la matriz ingresada
+	 * revisa si son números o letras y regresa solo los datos númericos
+	 * @param:  matriz- String [][] matriz de donde se desea extraer los datos núericos , arrIsInteger-boolean[]
+	 * @return:  numData - double [][] matriz que contiene los datos númericos
+	 */ 
+	
+	
+	
 	public double[][][] extractASCII(String [][] matriz,boolean[] arrIsInteger){
 		int numStr=0;
 		for(boolean str: arrIsInteger)
@@ -133,6 +161,11 @@ public class Clustering{
 		}
 		return ASCIIValues;
 	}
+	/** Extrae los datos ASCII de la matriz ingresada
+	 * revisa si son números o letras y regresa solo las letras en forma de ASCII
+	 * @param:  matriz- String [][] matriz de donde se desea extraer los datos ASCII, arrIsInteger-boolean[]
+	 * @return:  numData - double [][] matriz que contiene los datos ASCII
+	 */ 
 
 
 	public boolean[] Clasificar(String [][] matriz){
@@ -148,12 +181,15 @@ public class Clustering{
 		}
 		return arrIsInteger;
 	}
+	/** Clasifica la matriz ingresada en números y letras
+	 * te dice si el dato es número o letra
+	 * @param:  matriz- String [][] matriz que se desea clasificar
+	 * @return: arrIsInteger- boolean[] arreglo de booleanos donde true significa entero y falkse signica letra
+	 */ 
 
-	
 	
 
 	private void start(String Uri){
-
 		//this.data={{""}};
 		try{
 			List<String> lines = Files.readAllLines(Paths.get(Uri));
@@ -194,6 +230,11 @@ public class Clustering{
 		}
 		System.out.println();	
 	}
+	/** Inicia el proceso de Clustering.
+	 * Manda a llamar todos los métodos de esta clase de forma en que se relize el algoritmo de Clsutering
+	 * @param:   Uri-  String que proporciona la dirección del archivo donde se encuentra la información en la que se quiere hacer clustering 
+	 */ 
+	
 	
 	
 }

@@ -28,7 +28,7 @@ public class Elemento{
             sizeASCII=0;    
     }
     /** Crea un elemento del cluster
-     * @param double[] numeros, double[][] palabras
+     * @param: double[] numeros, double[][] palabras
     */
 
     //CAMBIAR TODO EL MODELO ACTUAL A UNO DONDE SE TOMEN EN CUENTA NUMEROS Y CARACTERES EN UN MODELO BALANCEADO
@@ -39,7 +39,7 @@ public class Elemento{
         return this.datosNumericos;
     }
     /** regresa los números
-     * @return datosNumericos un double[] 
+     * @return: datosNumericos un double[] 
     */
     
     
@@ -47,7 +47,7 @@ public class Elemento{
         return this.datosASCII;
     }
     /** regresa el ASCII
-     * @return datosASCII un double[][]
+     * @return: datosASCII un double[][]
     */
     
     
@@ -55,7 +55,7 @@ public class Elemento{
         return sizeNum;
     }
     /** Regresa la cantidad de datos númericos
-     * @return sizeNum un Integer
+     * @return: sizeNum un Integer
     */
     
     
@@ -63,7 +63,7 @@ public class Elemento{
         return sizeASCII;
     }
     /** Regresa la cantidad de datos ASCII
-     * @return sizeASCII un Integer
+     * @return: sizeASCII un Integer
     */
     
     @Override
@@ -109,8 +109,8 @@ public class Elemento{
         return mayores/((double)(x.sizeNum+x.sizeASCII));
     }
     /** Regresa cual elemento es mayor revisando cada uno de sus componentes
-     * @param  Elemento x, Elemento Centroide 
-     * @return Redresa un double que represnta por cuantos componentes es mayor
+     * @param:  Elemento x, Elemento Centroide 
+     * @return: Redresa un double que represnta por cuantos componentes es mayor
     */
 }
 
