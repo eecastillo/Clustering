@@ -7,6 +7,10 @@ import java.nio.file.Paths;
 
 
 public class Clustering{
+	/** Esta clase............
+	 * @author: Castillo Pulido Ethandrake, Anahí Santana Hernández, Ricardo Cuevas Rosas
+	 * @version: 21/11/2018
+	 */
 	
 	protected String[][] data={{""}};
 	protected double[][] matrixNumNormalized;

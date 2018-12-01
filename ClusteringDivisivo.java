@@ -1,6 +1,10 @@
 import java.util.*;
 
 public class ClusteringDivisivo extends Clustering {
+	/** Esta clase............
+	 * @author: Castillo Pulido Ethandrake, Anahí Santana Hernández, Ricardo Cuevas Rosas
+	 * @version: 21/11/2018
+	 */
 
 	public ClusteringDivisivo(String Uri) {
 		super(Uri);

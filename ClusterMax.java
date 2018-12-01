@@ -1,11 +1,23 @@
 public class ClusterMax extends Cluster{
+	/** Esta clase contiene el tipo de cluster por distancia máxima.
+	 * En este tipo de cluster la semejanza entre dos clusters
+     * esta dada por la distancia entre los individuos más alejados.
+	 * @author: Castillo Pulido Ethandrake, Anahí Santana Hernández, Ricardo Cuevas Rosas
+	 * @version: 21/11/2018
+	 */
 
     public ClusterMax(double[] numData, double[][] ASCIIData){
         super(numData,ASCIIData);
     }
+    /** Crea un Cluster max
+     * @param  double[] numData - matriz con datos numericos, double[][] ASCIIData - matriz con datos ASCII
+    */
     public ClusterMax(ClusterMax x, ClusterMax y){
         super(x,y);
     }
+    /** Crea un Cluster max
+     * @param ClusterMax x, ClusterMax y
+    */
 
     public static double Distancia(Cluster x, Cluster y, TipoD tipo){
         double distance=0;
@@ -21,4 +33,8 @@ public class ClusterMax extends Cluster{
         }
         return maxDistance;
     }
+    /** Regresa la distancia máxima entre dos clusters, usando el tipo de distancia seleccionado
+     * @param  Cluster x- el primer cluster a comparar, Cluster y- el segundo cluster a comparar , TipoD tipo- tipo de ditsnacia que se quiere
+     * @return  double maxDistance
+    */
 }

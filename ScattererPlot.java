@@ -15,6 +15,11 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 
 public class ScattererPlot extends JFrame {
+	/** Esta clase crea las gráficas de los clusters
+	 * @author: Castillo Pulido Ethandrake, Anahí Santana Hernández, Ricardo Cuevas Rosas
+	 * @version: 21/11/2018
+	 */
+	
   private static final long serialVersionUID = 6294689542092367723L;
 
   public ScattererPlot(String title, ArrayList<? extends Cluster> clust ) {
@@ -31,14 +36,16 @@ public class ScattererPlot extends JFrame {
     XYPlot plot = (XYPlot)chart.getPlot();
     plot.setBackgroundPaint(Color.DARK_GRAY);
     
-   
     // Create Panel
     ChartPanel panel = new ChartPanel(chart);
     setContentPane(panel);
   }
+  /** Crea todo lo que se necesita para hacer una gráfica
+   * @param clust un ArrayList de objetos que extienden a Cluster, 
+   * title un String que será el nombre de la gráfica
+  */
 
-  public XYDataset createDataset(ArrayList<? extends Cluster> clust) {
-	  
+  public XYDataset createDataset(ArrayList<? extends Cluster> clust) {  
     XYSeriesCollection dataset = new XYSeriesCollection();
     XYSeries[] seriesCluster=new XYSeries[clust.size()];
    
@@ -51,27 +58,26 @@ public class ScattererPlot extends JFrame {
     	}
     	dataset.addSeries(seriesCluster[i]);
     }
-	  
-    
-  /*  XYSeries series01234 = new XYSeries("Cluster 3-4");
-    series01234.add(1, 45);
-    series01234.add(2, 21);
-    series01234.add(2, 36);
-    series01234.add(4, 48);
-    series01234.add(5, 55);
-    dataset.addSeries(series01234);*/
-
     return dataset;
   }
+  /** Crea una serie de datos en XY
+   * para poder gráficarlos
+   * @param clust un ArrayList de objetos que extienden a Cluster
+   * @return XYDataset
+  */
 
   public static void plot(String string,ArrayList<? extends Cluster> clust ) {
     SwingUtilities.invokeLater(() -> {
-      ScattererPlot example = new ScattererPlot("Scatter Chart Example", clust);
+      ScattererPlot example = new ScattererPlot("Aprupacion de los clusters", clust);
       example.setSize(1000, 600);
       example.setLocationRelativeTo(null);
       example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
       example.setVisible(true);
     });
   }
+  /** Crea la gráfica
+   * en una ventana nueva
+   * @param clust un ArrayList de objetos que extienden a Cluster
+  */
   
 }
