@@ -19,13 +19,13 @@ public class ClusterCentroide extends Cluster{
      * @param  double[] numData - matriz con datos numericos, double[][] ASCIIData - matriz con datos ASCII
     */
 
-    public ClusterCentroide(ClusterCentroide x, ClusterCentroide y){
+    public ClusterCentroide(Cluster x, Cluster y){
         super(x, y);
         CalcularCentroideNumerico();
 		CalcularCentroideASCII();
 	}
     /** Crea un Cluster Centroide
-     * @param ClusterAverage  x, ClusterAverage  y
+     * @param Cluster  x, Cluster  y
     */
 
     
@@ -93,11 +93,11 @@ public class ClusterCentroide extends Cluster{
     /** Calcula el centroide de los datos ASCII
     */
 
-    public static double Distancia(ClusterCentroide x, ClusterCentroide y, TipoD tipo){
-        double[] centroideNumX = x.getCentroideNum();
-		double[] centroideNumY = y.getCentroideNum();
-		double[][] centroideASCIIX = x.getCentroideASCII();
-		double[][] centroideASCIIY = y.getCentroideASCII();
+    public static double Distancia(Cluster x, Cluster y, TipoD tipo){
+        double[] centroideNumX = ((ClusterCentroide)x).getCentroideNum();
+		double[] centroideNumY = ((ClusterCentroide)y).getCentroideNum();
+		double[][] centroideASCIIX = ((ClusterCentroide)x).getCentroideASCII();
+		double[][] centroideASCIIY = ((ClusterCentroide)y).getCentroideASCII();
 		return Cluster.Distancia(centroideNumX, centroideNumY, centroideASCIIX,centroideASCIIY, tipo);
 		
 		//System.out.println(Arrays.toString(centroideNumX));

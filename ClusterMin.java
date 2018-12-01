@@ -11,11 +11,11 @@ public class ClusterMin extends Cluster{
     /** Crea un Cluster min
      * @param  double[] numData - matriz con datos numericos, double[][] ASCIIData - matriz con datos ASCII
     */
-    public ClusterMin(ClusterMin x, ClusterMin y){
+    public ClusterMin(Cluster x, Cluster y){
         super(x,y);
     }
     /** Crea un Cluster min
-     * @param ClusterMin x, ClusterMin y
+     * @param Cluster x, Cluster y
     */
 
     public static double Distancia(Cluster x, Cluster y, TipoD tipo){

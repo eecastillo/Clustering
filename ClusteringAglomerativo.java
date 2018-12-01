@@ -9,17 +9,33 @@ public class ClusteringAglomerativo extends Clustering {
 	 * @version: 21/11/2018
 	 */
 
-	//final Class<T> t;
-
 	public ClusteringAglomerativo(String Uri, TipoD tipoD, TipoC tipoC) {
 		super(Uri);
+		Aglomerativo(tipoD, tipoC);
+	}
+	/** Crea un  clustering aglomerativo
+	 *@param matriz- String[][] matriz de datos para Clustering
+	 *@param tipoD- TipoD tipo de disctancia que se quiere utilizar
+	 *@param tipoC- TipoC tipo de Cluster que se quiere utilizar
+	 */
+	
+	public ClusteringAglomerativo(String[][] matriz, TipoD tipoD, TipoC tipoC) {
+		super(matriz);
+		Aglomerativo(tipoD, tipoC);
+	}
+	/** Crea un  clustering aglomerativo
+	 *@param Uri- la dirección del archivo de donde se sacará la información para relizar clustering
+	 *@param tipoD- TipoD tipo de disctancia que se quiere utilizar
+	 *@param tipoC- TipoC tipo de Cluster que se quiere utilizar
+	 */
+	
+		
+	private void Aglomerativo(TipoD tipoD, TipoC tipoC) {
 		ArrayList<Cluster> clust = new ArrayList<Cluster>();
 		for(int n=0;n<data.length;n++){
-			ClusterFactory clusterTipe = new ClusterFactory(tipoC,matrixNumNormalized[n],matrixASCII[n]);
-			clust.add(clusterTipe.getCluster());
+			clust.add(ClusterFactory.getClusterTypeInstance(matrixNumNormalized[n],matrixASCII[n],tipoC));
 		}
 		System.out.println(clust.size());
-
 		for(int n=0;n<clust.size();n++){
 			System.out.println(clust.get(n));
 		}
@@ -30,11 +46,8 @@ public class ClusteringAglomerativo extends Clustering {
 			int y=0;
 			double distance=0;
 			for(int i=0;i<clust.size()-1;i++){
-				// System.out.println(i);
 				for(int j=i+1;j<clust.size();j++){
-					//  System.out.printf("%d %d \n",i,j);
-
-					distance=ClusterCentroide.Distancia(clust.get(i), clust.get(j), tipoD); //aqui se debe cambiar algo
+					distance = ClusterFactory.getClusterTypeDistance(clust.get(i), clust.get(j), tipoD,tipoC);
 					System.out.printf("Distancia entre %d y %d: %f\n",i,j,distance);
 					if(distance<distanceMin){
 						distanceMin=distance;
@@ -45,8 +58,7 @@ public class ClusteringAglomerativo extends Clustering {
 				}
 			}
 			System.out.printf("Distancia minima entre %d y %d: %f\n",x,y,distanceMin);
-
-			clust.add(new ClusterCentroide(clust.remove(y),clust.remove(x)));
+			clust.add(ClusterFactory.getClusterTypeFusion(clust.remove(y),clust.remove(x),tipoC));
 			for(int n=0;n<clust.size();n++){
 				System.out.println(clust.get(n));
 			}
@@ -58,6 +70,9 @@ public class ClusteringAglomerativo extends Clustering {
 			}
 			System.out.println(clust.size());
 		}
-
 	}
+	/**En este método se ejecuta el algoritmo de Clustering aglometarivo
+	 *@param tipoD- TipoD tipo de disctancia que se quiere utilizar
+	 *@param tipoC- TipoC tipo de Cluster que se quiere utilizar
+	 */
 }
