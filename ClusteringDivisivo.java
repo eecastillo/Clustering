@@ -10,7 +10,22 @@ public class ClusteringDivisivo extends Clustering {
 
 	public ClusteringDivisivo(String Uri) {
 		super(Uri);
-		
+		 Divisivo();
+	}
+	/** Reliza el tipo de clustering divisivo
+	 *@param Uri- la dirección del archivo de donde se sacará la información para relizar clustering
+	 */
+	
+	public ClusteringDivisivo(String[][] matriz) {
+		super(matriz);
+		 Divisivo();
+	}
+	/** Reliza el tipo de clustering divisivo
+	 *@param matriz- String[][] matriz de datos para Clustering
+	 */
+	
+	private void Divisivo() {
+	
 	ArrayList<ClusterCentroide> clustD = new ArrayList<ClusterCentroide>();
 	
      clustD.add(new ClusterCentroide(matrixNumNormalized,matrixASCII));
@@ -24,16 +39,13 @@ public class ClusteringDivisivo extends Clustering {
      do{
          isSingleton=true;
          for(int i=0;i<clustD.size();i++){
-            // System.out.println(clustD.get(i).size);
              if(clustD.get(i).size>1){
-                // System.out.printf("indice:%d, tamaÃ±o:%d\n",i,clustD.get(i).size);
                  isSingleton=false;
                  ClusterCentroide[] arrClust=ClusterCentroide.Divir(clustD.remove(i));
                  clustD.add(arrClust[0]);
                  clustD.add(arrClust[1]);
                  break;
              }
-           // System.out.printf("tamaÃ±o lista:%d\n",clustD.size());
              
          }
          ScattererPlot.plot("Grafica",clustD);
@@ -48,8 +60,7 @@ public class ClusteringDivisivo extends Clustering {
 
      }
 	}
-	/** Reliza el tipo de clustering divisivo
-	 *@param Uri- la dirección del archivo de donde se sacará la información para relizar clustering
+	/**En este método se ejecuta el algoritmo de Clustering divisivo
 	 */
 	
 

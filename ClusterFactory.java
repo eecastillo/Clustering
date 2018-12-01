@@ -5,44 +5,77 @@ public class ClusterFactory {
 	 * @version: 21/11/2018
 	 */
 	
-	private TipoC tipoC;
-	private double matrixNumNormalized[];
-	private double matrixASCII[][];
+	public static Cluster getClusterTypeInstance(double[] numData, double[][] ASCIIData,TipoC type){
+        switch(type){
+        case CLUSTER_MAX:
+            System.out.println("ClusterMax");
+            return new ClusterMax(numData,ASCIIData);
+        case CLUSTER_CENTROIDE:
+            System.out.println("ClusterCentroide");
+            return new ClusterCentroide(numData,ASCIIData);
+        case CLUSTER_MIN:
+            System.out.println("ClusterMin");
+            return new ClusterMin(numData,ASCIIData);
+        case CLUSTER_AVERAGE:
+            System.out.println("ClusterAverage");
+            return new ClusterAverage(numData,ASCIIData);
+        default:
+        	return new ClusterCentroide(numData,ASCIIData);
+        }
+    }
+	/**En este método se devuelve una instancia del tipo de Clustering correspondiente su argumento de entrada
+	 *@param tipoC- TipoC tipo de Cluster que se quiere utilizar
+	 *@param numData- double[],  ASCIIData - double[][]: matrices con la información que tendrán los clusters
+	 */
 	
-
-	public ClusterFactory(TipoC tipoC,double[] matrixNumNormalized,double[][] matrixASCII) {
-		setTipoC(tipoC);
-		this.matrixNumNormalized=matrixNumNormalized;
-		this.matrixASCII = matrixASCII;
-	}
-	
-	public ClusterFactory(double[] matrixNumNormalized,double[][] matrixASCII) {
-		this.matrixNumNormalized=matrixNumNormalized;
-		this.matrixASCII = matrixASCII;
-	}
-	
-	public void setTipoC(TipoC tipo){
-		this.tipoC = tipo;
-	}
-	
-	public Cluster getCluster() {
-		switch(this.tipoC) {
-		case CLUSTER_CENTROIDE:
-			return new ClusterCentroide(this.matrixNumNormalized,this.matrixASCII);
-
-		case CLUSTER_MIN:
-			return new ClusterMin(this.matrixNumNormalized,this.matrixASCII);
-			
-		case CLUSTER_MAX:
-			return new ClusterMax(this.matrixNumNormalized,this.matrixASCII);
-			
-		case CLUSTER_AVERAGE:
-			return new ClusterAverage(this.matrixNumNormalized,this.matrixASCII);
-		
-		}
-		
-		return new Cluster();
-		
-	}
+    public static double getClusterTypeDistance(Cluster x, Cluster y, TipoD tipo,  TipoC type){
+        switch(type){
+            case CLUSTER_MAX:
+                System.out.println("ClusterMax");
+                return ClusterMax.Distancia(x, y, tipo);
+            case CLUSTER_CENTROIDE:
+                System.out.println("ClusterCentroide");
+                return ClusterCentroide.Distancia(x, y, tipo);
+            case CLUSTER_MIN:
+                System.out.println("ClusterMin");
+                return ClusterMin.Distancia(x, y, tipo);
+            case CLUSTER_AVERAGE:
+                System.out.println("ClusterAverage");
+                return ClusterAverage.Distancia(x, y, tipo);
+            default:
+            	 return ClusterCentroide.Distancia(x, y, tipo);
+            }
+    }
+	/**En este método se devuelve la distancia entre Clusters
+	 *  del tipo de Clustering correspondiente su argumento de entrada
+	 *@param tipoC- TipoC tipo de Cluster que se quiere utilizar
+	 *@param tipoD - TipoD tipo de distancia que se desea utilizar
+	 *@param Cluster x, Cluster y - Clusters entre los cuales se calculará la distancia
+	 */
+    
+    public static Cluster getClusterTypeFusion(Cluster x, Cluster y, TipoC type){
+    	 switch(type){
+         case CLUSTER_MAX:
+             System.out.println("ClusterMax");
+             return new ClusterMax(x,y);
+         case CLUSTER_CENTROIDE:
+             System.out.println("ClusterCentroide");
+             return new ClusterCentroide(x,y);
+         case CLUSTER_MIN:
+             System.out.println("ClusterMin");
+             return new ClusterMin(x,y);
+         case CLUSTER_AVERAGE:
+             System.out.println("ClusterAverage");
+             return new ClusterAverage(x,y);
+         default:
+        	 return new ClusterCentroide(x,y);
+         }
+    		/**En este método fusiona dos Clusters
+    		 *  del tipo de Clustering correspondiente su argumento de entrada
+    		 *@param tipoC- TipoC tipo de Cluster que se quiere utilizar
+    		 *@param Cluster x, Cluster y - Clusters que se fusionarán
+    		 */
+        
+    }
 
 }

@@ -24,7 +24,14 @@ public class Clustering{
 	
 	
 	public Clustering(String Uri){
-		start(Uri);
+		startUri(Uri);
+	}
+	/** 
+	 * @param: Uri- direccion del archivo de donde se obtendran los datos 
+	 */
+	public Clustering(String[][] matriz){
+		data=matriz;
+		start(data);
 	}
 	/** 
 	 * @param: Uri- direccion del archivo de donde se obtendran los datos 
@@ -189,7 +196,7 @@ public class Clustering{
 
 	
 
-	private void start(String Uri){
+	private void startUri(String Uri){
 		//this.data={{""}};
 		try{
 			List<String> lines = Files.readAllLines(Paths.get(Uri));
@@ -209,15 +216,17 @@ public class Clustering{
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}
+		start(data);
 
-
+	}
+	/** Extrae la matriz de datos de un archivo CSV para iniciar el proceso de Clusstering
+	 * @param:   Uri-  String que proporciona la dirección del archivo donde se encuentra la información en la que se quiere hacer clustering 
+	 */ 
+	
+	private void start(String[][] data) {
 		boolean [] classify=Clasificar(data);
 
 		double[][]  matrixNum = extractNum(data, classify);
-		/*  for(int i=0;i<matrixNum.length;i++){
-            System.out.println(Arrays.toString( matrixNum[i]));
-        }
-        System.out.println();*/
 		matrixASCII=extractASCII(data, classify);
 		for(int i=0;i<matrixASCII.length;i++){
 			for(int j=0;j<matrixASCII[i].length;j++){
@@ -232,8 +241,7 @@ public class Clustering{
 	}
 	/** Inicia el proceso de Clustering.
 	 * Manda a llamar todos los métodos de esta clase de forma en que se relize el algoritmo de Clsutering
-	 * @param:   Uri-  String que proporciona la dirección del archivo donde se encuentra la información en la que se quiere hacer clustering 
-	 */ 
+	 * @param:   data- String[][] matriz con los datos con los que se hará el proceso de Clustering */ 
 	
 	
 	

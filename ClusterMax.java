@@ -12,11 +12,11 @@ public class ClusterMax extends Cluster{
     /** Crea un Cluster max
      * @param  double[] numData - matriz con datos numericos, double[][] ASCIIData - matriz con datos ASCII
     */
-    public ClusterMax(ClusterMax x, ClusterMax y){
+    public ClusterMax(Cluster x, Cluster y){
         super(x,y);
     }
     /** Crea un Cluster max
-     * @param ClusterMax x, ClusterMax y
+     * @param Cluster x, Cluster y
     */
 
     public static double Distancia(Cluster x, Cluster y, TipoD tipo){

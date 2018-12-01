@@ -12,11 +12,11 @@ public class ClusterAverage extends Cluster{
     /** Crea un ClusterAverage
      * @param  double[] numData - matriz con datos numericos, double[][] ASCIIData - matriz con datos ASCII
     */
-    public ClusterAverage(ClusterAverage x, ClusterAverage y){
+    public ClusterAverage(Cluster x, Cluster y){
         super(x,y);
     }
     /** Crea un Cluster Average
-     * @param ClusterAverage  x, ClusterAverage  y
+     * @param Cluster  x, Cluster  y
     */
 
     public static double Distancia(Cluster x, Cluster y, TipoD tipo){
