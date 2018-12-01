@@ -15,7 +15,8 @@ public class Cluster{
 		this.elements[0]=new Elemento(numData,ASCIIData);
 	}
     /** Crea un Cluster
-     * @param  double[] numData - matriz con datos numericos, double[][] ASCIIData - matriz con datos ASCII
+     * @param   numData -double[] matriz con datos numericos
+     * @param  ASCIIData - double[][]  matriz con datos ASCII
     */
 
 
@@ -33,7 +34,8 @@ public class Cluster{
 		this.size=x.getSize()+y.getSize();
 	}
     /** Crea un Cluster
-     * @param Cluster  x, Cluster  y
+     * @param  x- Cluster  x
+     * @param y-  Cluster  y
     */
 
 	
@@ -46,7 +48,8 @@ public class Cluster{
 		}
 	}
 /** Crea un Cluster
-  * @param  double[][] numData - matriz con datos numericos, double[][][] ASCIIData - matriz con datos ASCII
+  * @param  numData - double[][] matriz con datos numericos, 
+  * @param ASCIIData - double[][][]  matriz con datos ASCII
  */
 	public Cluster(){
 		this.size=0;
@@ -61,21 +64,29 @@ public class Cluster{
 		this.elements[0]=new Elemento(numData,ASCIIData);
 	}
 	/** Establece las matrices del cluster
-	 * @param double[] numData-  martiz númerica, double[][] ASCIIData- matriz ASCII
+	 * @param  numData- double[]  martiz númerica
+	 * @param  ASCIIData- double[][] matriz ASCII
 	 */
 	
 
 	public int getSize(){
 		return this.size;
 	}
-
+  /** Regresa el tamaño del cluster
+     * @return integer- tamaño del cluster
+    */
+    
 	public Elemento[] getElements(){
 		return elements;
 	}
+	  /** Regresa los elementos del cluster
+     * @return elements- Elemento[] arreglo de ELementos del cluster
+    */
 
 	 public static double Distancia(Cluster x, Cluster y, TipoD tipo){
 		 return 0;
 	 }
+	
 
 	protected static double Distancia(double[] xNum, double[] yNum, double[][] xASCII, double[][] yASCII, TipoD tipo){
 		double distance=0.0;
@@ -237,6 +248,10 @@ public class Cluster{
 		System.out.println("distanceTotal: " + distance);*/
 		return distance;
 	}
+	  /**Este metodo calcula la tistancia dependiento del tipo de distqancia selecionado
+	   * @param double[] xNum, double[] yNum, double[][] xASCII, double[][] yASCII, TipoD tipo
+	   * @return Double Distancia
+	   */
 
 
 	@Override
@@ -248,7 +263,10 @@ public class Cluster{
 			print+="/";
 		}
 		return print;
-	}
+	}	  /**Imprime los elementos del cluster
+	   * @return String de los elementos
+	   */
+	
 
 
 

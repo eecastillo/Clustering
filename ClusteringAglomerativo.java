@@ -1,7 +1,10 @@
 import java.util.ArrayList;
 
 public class ClusteringAglomerativo extends Clustering {
-	/** Esta clase............
+	/** Esta clase reliza el tipo de clustering aglomerativo.
+	 * En este tipo de clustering todos los elementos empiezan sientdo su propio cluster
+	 * (entonces habrá un cluster por cada elemento)
+	 * se irán uniendo de acuerdo a sus similitudes.
 	 * @author: Castillo Pulido Ethandrake, Anahí Santana Hernández, Ricardo Cuevas Rosas
 	 * @version: 21/11/2018
 	 */

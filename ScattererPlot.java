@@ -41,7 +41,7 @@ public class ScattererPlot extends JFrame {
     setContentPane(panel);
   }
   /** Crea todo lo que se necesita para hacer una gráfica
-   * @param clust un ArrayList de objetos que extienden a Cluster, 
+   * @param: clust un ArrayList de objetos que extienden a Cluster, 
    * title un String que será el nombre de la gráfica
   */
 
@@ -62,8 +62,8 @@ public class ScattererPlot extends JFrame {
   }
   /** Crea una serie de datos en XY
    * para poder gráficarlos
-   * @param clust un ArrayList de objetos que extienden a Cluster
-   * @return XYDataset
+   * @param: clust un ArrayList de objetos que extienden a Cluster
+   * @return: XYDataset
   */
 
   public static void plot(String string,ArrayList<? extends Cluster> clust ) {
@@ -77,7 +77,7 @@ public class ScattererPlot extends JFrame {
   }
   /** Crea la gráfica
    * en una ventana nueva
-   * @param clust un ArrayList de objetos que extienden a Cluster
+   * @param: clust un ArrayList de objetos que extienden a Cluster
   */
   
 }
