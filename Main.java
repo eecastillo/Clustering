@@ -1,4 +1,3 @@
-
 public class Main {
 
 	public static void main(String[] args) {
@@ -19,8 +18,18 @@ public class Main {
 				    		{"4", "9"},
 				    		{"12", "10"},
 				    		{"84", "9"} };*/
-		//ClusteringDivisivo c1 = new ClusteringDivisivo(matriz);
-		ClusteringAglomerativo c2 = new ClusteringAglomerativo(Uri, TipoD.EUCLIDIAN, TipoC.CLUSTER_CENTROIDE);
+		/*try {
+			ClusteringDivisivo c1 = new ClusteringDivisivo(Uri,17);
+		} catch (OutOfRangeNumberFoundException e) { 
+			System.out.println(e);
+		}*/
+		
+		try {
+			ClusteringAglomerativo c2 = new ClusteringAglomerativo(Uri, TipoD.EUCLIDIAN, TipoC.CLUSTER_CENTROIDE, 15);
+		} catch (OutOfRangeNumberFoundException e) { 
+			System.out.println(e);
+		}
+		
 		
 		
 	}
