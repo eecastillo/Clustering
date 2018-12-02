@@ -25,7 +25,7 @@ public class Main {
 		}*/
 		
 		try {
-			ClusteringAglomerativo c2 = new ClusteringAglomerativo(Uri, TipoD.EUCLIDIAN, TipoC.CLUSTER_CENTROIDE, 15);
+			ClusteringAglomerativo c2 = new ClusteringAglomerativo(Uri, TipoD.EUCLIDIAN, TipoC.CLUSTER_MIN, 1);
 		} catch (OutOfRangeNumberFoundException e) { 
 			System.out.println(e);
 		}

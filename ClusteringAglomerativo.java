@@ -63,18 +63,30 @@ public class ClusteringAglomerativo extends Clustering {
 					}
 				}
 			}
+			ScattererPlot.plot("Grafica",clust);
+			try {
+			Thread.sleep(3000);}
+			catch(InterruptedException e) {
+
+			}
 			System.out.printf("Distancia minima entre %d y %d: %f\n",x,y,distanceMin);
 			clust.add(ClusterFactory.getClusterTypeFusion(clust.remove(y),clust.remove(x),tipoC));
 			for(int n=0;n<clust.size();n++){
 				System.out.println(clust.get(n));
 			}
-			ScattererPlot.plot("Grafica",clust);
-			try {
-			Thread.sleep(3000);}
-			catch(InterruptedException e) {
-				
-			}
+//			ScattererPlot.plot("Grafica",clust);
+//			try {
+//			Thread.sleep(3000);}
+//			catch(InterruptedException e) {
+//				
+//			}
 			System.out.println(clust.size());
+		}
+		ScattererPlot.plot("Grafica",clust);
+		try {
+		Thread.sleep(3000);}
+		catch(InterruptedException e) {
+
 		}
 	}
 	/**En este método se ejecuta el algoritmo de Clustering aglometarivo
