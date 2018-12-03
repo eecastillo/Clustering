@@ -1,3 +1,4 @@
+package Clustering;
 
 public class ClusterCentroide extends Cluster{
 	/** Esta clase contiene el tipo de cluster por distancia centroide.

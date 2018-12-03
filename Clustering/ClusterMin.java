@@ -1,3 +1,5 @@
+package Clustering;
+
 public class ClusterMin extends Cluster{
 	/** Esta clase contiene el tipo de cluster por distancia máxima.
 	 * En este tipo de cluster la semejanza entre dos clusters

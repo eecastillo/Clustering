@@ -1,5 +1,7 @@
+package Clustering;
+
 public enum TipoD{
-	/** Esta enumeración describe los tipod de distancia
+	/** Esta enumeración describe los tipos de distancia
 	 * Que pueden ser utilizados para los algoritmos de clustering
 	 * @author: Castillo Pulido Ethandrake, Anahí Santana Hernández, Ricardo Cuevas Rosas
 	 * @version: 21/11/2018

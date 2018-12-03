@@ -1,3 +1,5 @@
+package Clustering;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -87,7 +89,7 @@ public class Clustering{
 		}
 		return normalizado;
 	}
-	/** Normaliza la matriz de datos ASSCI
+	/** Normaliza la matriz de datos ASCII
 	 * @param:  matriz- double [][]  matriz númerica(de ASCII) con los datos a normalizar
 	 * @return:  normalizado - double[][] matriz númerica(de ASCII) con los datos normalizados
 	 */

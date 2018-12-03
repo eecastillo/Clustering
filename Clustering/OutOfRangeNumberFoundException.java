@@ -1,3 +1,4 @@
+package Clustering;
 
 public class OutOfRangeNumberFoundException extends Exception {
 	/** Esta Exception revisa si el valor de k esta dentro de los rangos del tamaño 

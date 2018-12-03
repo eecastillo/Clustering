@@ -1,3 +1,4 @@
+package Clustering;
 
 public enum TipoC {
 	/** Esta enumeración describe los tipos de clusters

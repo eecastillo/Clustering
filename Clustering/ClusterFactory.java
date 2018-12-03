@@ -1,3 +1,5 @@
+package Clustering;
+
 
 public class ClusterFactory {
 	/** Esta clase crea instancias de el tipo de cluster que le pidas

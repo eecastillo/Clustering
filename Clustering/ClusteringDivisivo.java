@@ -1,11 +1,13 @@
+package Clustering;
+
 import java.util.*;
 
 
 
 public class ClusteringDivisivo extends Clustering {
-	/** Esta clase reliza el tipo de clustering divisivo.
+	/** Esta clase realiza el tipo de clustering divisivo.
 	 * En este tipo de clustering todos los elementos empiezan en un mismo cluster 
-	 * y se van dividiendo segun sus diferenciqas.
+	 * y se van dividiendo según sus diferencias.
 	 * @author: Castillo Pulido Ethandrake, Anahí Santana Hernández, Ricardo Cuevas Rosas
 	 * @version: 21/11/2018
 	 */

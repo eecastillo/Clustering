@@ -1,3 +1,5 @@
+package Clustering;
+
 public class ClusterAverage extends Cluster{
 	/** Esta clase contiene el tipo de cluster por distancia promedio.
 	 * En este tipo de cluster la semejanza entre dos clusters
